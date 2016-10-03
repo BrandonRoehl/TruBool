@@ -1,7 +1,9 @@
 class Board {
-    constructor(width, height){
+    constructor(width, height, gameWidth, gameHeight){
         this.width = width;
         this.height = height;
+        this.gameWidth = gameWidth;
+        this.gameHeight = gameHeight;
     }
 
     boardWidth(){
@@ -32,9 +34,29 @@ var mouseDown;
 var mouseX, mouseY;
 
 document.addEventListener("DOMContentLoaded", function(event){
-    board = new Board(window.innerWidth, window.innerHeight);
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
     isMouseDown = false;
+
+    var gameBoard = document.getElementById("game_board");
+    Array.from(gameBoard.getElementsByClassName("input")).forEach(
+        function(input, inputIndex){
+            Array.from(input.getElementsByTagName("div")).forEach(
+                function(element, elementIndex){
+                    console.log(element.innerHTML);
+                }
+            );
+        }
+    );
+
+    board = new Board(
+        window.innerWidth,
+        window.innerHeight,
+        parseInt(gameBoard.getElementsByClassName("width")[0].innerHTML),
+        parseInt(gameBoard.getElementsByClassName("height")[0].innerHTML)
+    );
+
+    console.log(board);
+
     repaint();
     alert(board.boardWidth() + "x" + board.boardHeight());
     console.log("This is a test");
