@@ -9,7 +9,7 @@ class Board {
     }
 
     boardHeight(){
-        return this.width - 20;
+        return this.height - 20;
     }
 
     boardX(){
@@ -19,21 +19,55 @@ class Board {
     boardY(){
         return 10;
     }
+
+    draw(canvas){
+        canvas.fillStyle = "#000000";
+        canvas.fillRect(this.boardX(),this.boardY(),this.boardWidth(),this.boardHeight());
+    }
 }
 
 var board;
 var canvas;
+var mouseDown;
+var mouseX, mouseY;
 
-window.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function(event){
     board = new Board(window.innerWidth, window.innerHeight);
-    canvas = document.getElementById("canvas").getContext("2d");
+    canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
+    isMouseDown = false;
     repaint();
     alert(board.boardWidth() + "x" + board.boardHeight());
 });
 
-function repaint(canvas){
+window.addEventListener("resize", function(event){
+    board.width = window.innerWidth;
+    board.height = window.innerHeight;
+    repaint();
+});
+
+document.addEventListener("mousedown", function(event){
+    mouseDown = true;
+    repaint();
+});
+
+document.addEventListener("mouseup", function(event){
+    mouseDown = false;
+    repaint();
+});
+
+document.addEventListener("mousemove", function(event){
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    repaint();
+});
+
+function repaint(){
     clear(canvas);
-    canvas.fillRect(25,25,100,100);
+    board.draw(canvas);
+    if (mouseDown) {
+        canvas.fillStyle = "#ffffff";
+        canvas.fillRect(mouseX - 50, mouseY - 50, 100, 100);
+    }
 }
 
 function clear(canvas){
