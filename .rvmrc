@@ -33,6 +33,7 @@ then
   if (( ${rvm_use_flag:=1} >= 1 )) # display automatically
   then
     if [[ $- != *i* ]] # check for interactive shells
+    then
       printf "%b" "Using: $GEM_HOME\n" # don't use colors in non-interactive shells
     fi
   fi
