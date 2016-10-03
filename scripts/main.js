@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     isMouseDown = false;
     repaint();
     alert(board.boardWidth() + "x" + board.boardHeight());
+    console.log("This is a test");
 });
 
 window.addEventListener("resize", function(event){
