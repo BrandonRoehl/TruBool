@@ -1,9 +1,14 @@
 class Board {
-    constructor(width, height, gameWidth, gameHeight){
+    constructor(width, height, gameWidth, gameHeight, inputs, outputs, pieces){
         this.width = width;
         this.height = height;
-        this.gameWidth = gameWidth;
-        this.gameHeight = gameHeight;
+        this.layout = new Array(gameWidth);
+        for(var i = 0; i < gameWidth; i++){
+            this.layout[i] = new Array(gameHeight);
+        }
+        this.inputs = inputs;
+        this.outputs = outputs;
+        this.pieces = pieces;
     }
 
     boardWidth(){
@@ -26,6 +31,14 @@ class Board {
         canvas.fillStyle = "#000000";
         canvas.fillRect(this.boardX(),this.boardY(),this.boardWidth(),this.boardHeight());
     }
+
+    gameWidth(){
+        return this.layout.length;
+    }
+
+    gameHeight(){
+        return this.layout[0].length;
+    }
 }
 
 var board;
@@ -38,22 +51,31 @@ document.addEventListener("DOMContentLoaded", function(event){
     isMouseDown = false;
 
     var gameBoard = document.getElementById("game_board");
-
-    console.log(toLogicArray(gameBoard, "input"));
-    console.log(toLogicArray(gameBoard, "output"));
+    
+    var inputs = toLogicArray(gameBoard, "input");
+    var outputs = toLogicArray(gameBoard, "output");
+    var piecesHTML = Array.from(gameBoard.getElementsByClassName("pieces")[0].getElementsByTagName("div"));
+    var pieces = new Array(piecesHTML.length);
+    piecesHTML.forEach(
+        function(element, index){
+            pieces[index] = parseInt(element.innerHTML);
+        }
+    );
 
     board = new Board(
         window.innerWidth,
         window.innerHeight,
         parseInt(gameBoard.getElementsByClassName("width")[0].innerHTML),
-        parseInt(gameBoard.getElementsByClassName("height")[0].innerHTML)
+        parseInt(gameBoard.getElementsByClassName("height")[0].innerHTML),
+        inputs,
+        outputs,
+        pieces
     );
 
     console.log(board);
 
     repaint();
-    alert(board.boardWidth() + "x" + board.boardHeight());
-    console.log("This is a test");
+    alert(board.gameWidth() + "x" + board.gameHeight());
 });
 
 function toLogicArray(element, className){
