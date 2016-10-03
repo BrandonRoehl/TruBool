@@ -38,15 +38,9 @@ document.addEventListener("DOMContentLoaded", function(event){
     isMouseDown = false;
 
     var gameBoard = document.getElementById("game_board");
-    Array.from(gameBoard.getElementsByClassName("input")).forEach(
-        function(input, inputIndex){
-            Array.from(input.getElementsByTagName("div")).forEach(
-                function(element, elementIndex){
-                    console.log(element.innerHTML);
-                }
-            );
-        }
-    );
+
+    console.log(toLogicArray(gameBoard, "input"));
+    console.log(toLogicArray(gameBoard, "output"));
 
     board = new Board(
         window.innerWidth,
@@ -61,6 +55,23 @@ document.addEventListener("DOMContentLoaded", function(event){
     alert(board.boardWidth() + "x" + board.boardHeight());
     console.log("This is a test");
 });
+
+function toLogicArray(element, className){
+    var inputsHTML = Array.from(element.getElementsByClassName(className));
+    var inputs = new Array(inputsHTML.lenght);
+    inputsHTML.forEach(
+        function(input, inputIndex){
+            var elementsHTML = Array.from(input.getElementsByTagName("div"));
+            inputs[inputIndex] = new Array(elementsHTML.lenght);
+            elementsHTML.forEach(
+                function(element, elementIndex){
+                    inputs[inputIndex][elementIndex] = parseInt(element.innerHTML);
+                }
+            );
+        }
+    );
+    return inputs;
+}
 
 window.addEventListener("resize", function(event){
     board.width = window.innerWidth;
