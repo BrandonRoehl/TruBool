@@ -32,8 +32,8 @@ class Board {
     updateBoardDim(){
         // Find a scale unit on the board
         // This is the number of pixels a square takes up
-        var unitWidth = this.width / this.gameWidth;
-        var unitHeight = this.height / this.gameHeight;
+        var unitWidth = (this.width - 20) / this.gameWidth;
+        var unitHeight = (this.height - 20) / this.gameHeight;
         if (unitWidth < unitHeight) {
             this._unit = unitWidth;
         } else {
@@ -41,16 +41,16 @@ class Board {
         }
     }
 
-    get scale(){
-        return this._scale;
+    get unit(){
+        return this._unit;
     }
 
     get boardWidth(){
-        return this.width - 20;
+        return this.unit * this.gameWidth;
     }
 
     get boardHeight(){
-        return this.height - 20;
+        return this.unit * this.gameHeight;
     }
 
     get boardX(){
@@ -72,6 +72,15 @@ class Board {
     draw(canvas){
         canvas.fillStyle = "#000000";
         canvas.fillRect(this.boardX ,this.boardY, this.boardWidth, this.boardHeight);
+        var color = false;
+        for(var x = 0; x < this.gameWidth; x++){
+            color = !color;
+            for(var y = 0; y < this.gameHeight; y++){
+                color = !color;
+                canvas.fillStyle = color ? "#555555" : "#333333";
+                canvas.fillRect(this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+            }
+        }
     }
 }
 
@@ -156,7 +165,7 @@ function repaint(){
     board.draw(canvas);
     if (mouseDown) {
         canvas.fillStyle = "#ffffff";
-        canvas.fillRect(mouseX - 50, mouseY - 50, 100, 100);
+        canvas.fillRect(mouseX - (board.unit / 2), mouseY - (board.unit / 2), board.unit, board.unit);
     }
 }
 
