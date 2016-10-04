@@ -165,7 +165,7 @@ function repaint(){
     board.draw(canvas);
     if (mouseDown) {
         canvas.fillStyle = "#ffffff";
-        canvas.fillRect(mouseX - (board.unit / 2), mouseY - (board.unit / 2), board.unit, board.unit);
+        canvas.fillRect(mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
 }
 
