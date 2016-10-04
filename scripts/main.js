@@ -1,43 +1,77 @@
 class Board {
     constructor(width, height, gameWidth, gameHeight, inputs, outputs, pieces){
-        this.width = width;
-        this.height = height;
         this.layout = new Array(gameWidth);
         for(var i = 0; i < gameWidth; i++){
             this.layout[i] = new Array(gameHeight);
         }
+        this.width = width;
+        this.height = height;
         this.inputs = inputs;
         this.outputs = outputs;
         this.pieces = pieces;
     }
 
-    boardWidth(){
+    set width(width){
+        this._width = width;
+        this.updateBoardDim();
+    }
+
+    get width(){
+        return this._width;
+    }
+
+    set height(height){
+        this._height = height;
+        this.updateBoardDim();
+    }
+
+    get height(){
+        return this._height;
+    }
+
+    updateBoardDim(){
+        // Find a scale unit on the board
+        // This is the number of pixels a square takes up
+        var unitWidth = this.width / this.gameWidth;
+        var unitHeight = this.height / this.gameHeight;
+        if (unitWidth < unitHeight) {
+            this._unit = unitWidth;
+        } else {
+            this._unit = unitHeight;
+        }
+    }
+
+    get scale(){
+        return this._scale;
+    }
+
+    get boardWidth(){
         return this.width - 20;
     }
 
-    boardHeight(){
+    get boardHeight(){
         return this.height - 20;
     }
 
-    boardX(){
+    get boardX(){
         return 10;
     }
 
-    boardY(){
+    get boardY(){
         return 10;
+    }
+
+    get gameWidth(){
+        return this.layout.length;
+    }
+
+    get gameHeight(){
+        return this.layout[0].length;
     }
 
     draw(canvas){
         canvas.fillStyle = "#000000";
-        canvas.fillRect(this.boardX(),this.boardY(),this.boardWidth(),this.boardHeight());
-    }
-
-    gameWidth(){
-        return this.layout.length;
-    }
-
-    gameHeight(){
-        return this.layout[0].length;
+        canvas.fillRect(this.boardX ,this.boardY, this.boardWidth, this.boardHeight);
     }
 }
 
@@ -51,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     isMouseDown = false;
 
     var gameBoard = document.getElementById("game_board");
-    
+
     var inputs = toLogicArray(gameBoard, "input");
     var outputs = toLogicArray(gameBoard, "output");
     var piecesHTML = Array.from(gameBoard.getElementsByClassName("pieces")[0].getElementsByTagName("div"));
@@ -75,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     console.log(board);
 
     repaint();
-    alert(board.gameWidth() + "x" + board.gameHeight());
+    alert(board.gameWidth + " X " + board.gameHeight);
 });
 
 function toLogicArray(element, className){
