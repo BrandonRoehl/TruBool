@@ -155,9 +155,11 @@ document.addEventListener("mouseup", function(event){
 });
 
 document.addEventListener("mousemove", function(event){
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-    repaint();
+    if(mouseDown){
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+        repaint();
+    }
 });
 
 function repaint(){
