@@ -33,7 +33,7 @@ class Board {
         // Find a scale unit on the board
         // This is the number of pixels a square takes up
         var unitWidth = (this.width - 20) / this.gameWidth;
-        var unitHeight = (this.height - 20) / this.gameHeight;
+        var unitHeight = (this.height - 30) / (this.gameHeight + 1);
         if (unitWidth < unitHeight) {
             this._unit = unitWidth;
         } else {
@@ -54,11 +54,11 @@ class Board {
     }
 
     get boardX(){
-        return 10;
+        return (this.width - this.boardWidth) / 2;
     }
 
     get boardY(){
-        return 10;
+        return ((this.height - this.boardHeight - this.unit) / 2) - 5;
     }
 
     get gameWidth(){
@@ -74,12 +74,17 @@ class Board {
         canvas.fillRect(this.boardX ,this.boardY, this.boardWidth, this.boardHeight);
         var color = false;
         for(var x = 0; x < this.gameWidth; x++){
-            color = !color;
+            if (this.gameWidth % 2 != 0) color = !color;
             for(var y = 0; y < this.gameHeight; y++){
                 color = !color;
                 canvas.fillStyle = color ? "#555555" : "#333333";
                 canvas.fillRect(this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
             }
+        }
+        for(var x = 0; x < this.gameWidth; x++){
+            color = !color;
+            canvas.fillStyle = color ? "#555555" : "#333333";
+            canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
         }
     }
 }
@@ -88,6 +93,7 @@ var board;
 var canvas;
 var mouseDown;
 var mouseX, mouseY;
+var and_on;
 
 document.addEventListener("DOMContentLoaded", function(event){
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
@@ -117,6 +123,9 @@ document.addEventListener("DOMContentLoaded", function(event){
 
     console.log(board);
 
+    and_on = new Image();
+    and_on.src = "images/and-on.svg"
+
     repaint();
     alert(board.gameWidth + " X " + board.gameHeight);
 });
@@ -145,6 +154,8 @@ window.addEventListener("resize", function(event){
 });
 
 document.addEventListener("mousedown", function(event){
+    mouseX = event.clientX;
+    mouseY = event.clientY;
     mouseDown = true;
     repaint();
 });
@@ -167,7 +178,7 @@ function repaint(){
     board.draw(canvas);
     if (mouseDown) {
         canvas.fillStyle = "#ffffff";
-        canvas.fillRect(mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
+        canvas.drawImage(and_on, mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
 }
 

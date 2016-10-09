@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g transform="matrix(1.11111,0,0,1.11111,-27.7778,-27.7778)">
+        <path d="M475,137.5C475,75.41 424.59,25 362.5,25L137.5,25C75.41,25 25,75.41 25,137.5L25,362.5C25,424.59 75.41,475 137.5,475L362.5,475C424.59,475 475,424.59 475,362.5L475,137.5Z" style="fill:url(#_Radial1);"/>
+    </g>
+    <path d="M475,137.5C475,75.41 424.59,25 362.5,25L137.5,25C75.41,25 25,75.41 25,137.5L25,362.5C25,424.59 75.41,475 137.5,475L362.5,475C424.59,475 475,424.59 475,362.5L475,137.5Z" style="fill:rgb(255,106,0);"/>
+    <clipPath id="_clip2">
+        <path d="M475,137.5C475,75.41 424.59,25 362.5,25L137.5,25C75.41,25 25,75.41 25,137.5L25,362.5C25,424.59 75.41,475 137.5,475L362.5,475C424.59,475 475,424.59 475,362.5L475,137.5Z"/>
+    </clipPath>
+    <g clip-path="url(#_clip2)">
+        <path d="M100,100C100,100 286.104,100.253 365.153,173.451C386.468,193.188 500,327 500,327L500,500L201.977,500L100,400L100,100Z" style="fill:black;fill-opacity:0;"/>
+        <clipPath id="_clip3">
+            <path d="M100,100C100,100 286.104,100.253 365.153,173.451C386.468,193.188 500,327 500,327L500,500L201.977,500L100,400L100,100Z"/>
+        </clipPath>
+        <g clip-path="url(#_clip3)">
+            <g transform="matrix(-0.526857,-0.526857,1.04292,-1.04292,120.078,681.051)">
+                <rect x="-100" y="122" width="693" height="250" style="fill:url(#_Linear4);"/>
+            </g>
+        </g>
+    </g>
+    <path d="M100,100C100,100 400,100.408 400,250C400,399.592 100,400 100,400L100,100Z" style="fill:white;"/>
+    <defs>
+        <radialGradient id="_Radial1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(225,0,0,225,250,250)"><stop offset="0%" style="stop-color:black;stop-opacity:0.701961"/><stop offset="57%" style="stop-color:black;stop-opacity:0.568627"/><stop offset="79%" style="stop-color:black;stop-opacity:0.278431"/><stop offset="100%" style="stop-color:black;stop-opacity:0"/></radialGradient>
+        <linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(693,0,0,250,-100,247)"><stop offset="0%" style="stop-color:black;stop-opacity:0"/><stop offset="100%" style="stop-color:black;stop-opacity:0.701961"/></linearGradient>
+    </defs>
+</svg>
