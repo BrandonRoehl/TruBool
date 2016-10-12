@@ -85,7 +85,9 @@ class Board {
             color = !color;
             canvas.fillStyle = color ? "#555555" : "#333333";
             canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
-            canvas.drawImage(and_on, this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+            if(x < this.pieces.length){
+                canvas.drawImage(pieceAssets[(2 * this.pieces[x]) - 1], this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+            }
         }
     }
 }
@@ -94,7 +96,7 @@ var board;
 var canvas;
 var mouseDown;
 var mouseX, mouseY;
-var and_on;
+var pieceAssets;
 
 document.addEventListener("DOMContentLoaded", function(event){
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
@@ -124,8 +126,23 @@ document.addEventListener("DOMContentLoaded", function(event){
 
     console.log(board);
 
-    and_on = new Image();
-    and_on.src = "images/and-on.svg"
+    // Read in all the images
+    var images = [
+        "/images/and-on.svg",
+        "/images/and-off.svg",
+        "/images/or-on.svg",
+        "/images/or-off.svg",
+        "/images/not-on.svg",
+        "/images/not-off.svg"
+    ];
+
+    pieceAssets = new Array(images.length);
+    images.forEach(
+        function(element, index){
+            pieceAssets[index] = new Image();
+            pieceAssets[index].src = element;
+        }
+    );
 
     repaint();
     alert(board.gameWidth + " X " + board.gameHeight);
@@ -179,7 +196,7 @@ function repaint(){
     board.draw(canvas);
     if (mouseDown) {
         canvas.fillStyle = "#ffffff";
-        canvas.drawImage(and_on, mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
+        canvas.drawImage(pieceAssets[0], mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
 }
 
