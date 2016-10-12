@@ -85,6 +85,7 @@ class Board {
             color = !color;
             canvas.fillStyle = color ? "#555555" : "#333333";
             canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+            canvas.drawImage(and_on, this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
         }
     }
 }
