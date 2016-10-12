@@ -145,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function(event){
     );
 
     repaint();
-    alert(board.gameWidth + " X " + board.gameHeight);
 });
 
 function toLogicArray(element, className){
