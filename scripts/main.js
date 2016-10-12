@@ -145,6 +145,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     );
 
     repaint();
+    // This gives it 100ms to actualy load the assets
+    setInterval(repaint, 100);
 });
 
 function toLogicArray(element, className){
