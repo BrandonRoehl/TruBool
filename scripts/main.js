@@ -92,9 +92,18 @@ class Board {
     }
 
     getPiece(x, y) {
-        (y - this.boardY) / this.unit
-        (x - this.boardX) / this.unit
-        return 1;
+        var tmp = (y - this.boardY - this.boardHeight - 10);
+        if (tmp > 0 && tmp < this.unit) {
+            tmp = Math.trunc((x - this.boardX) / this.unit);
+            if (tmp < this.pieces.length){
+                return this.pieces.splice(tmp, 1);
+            }
+        }
+        return null;
+    }
+
+    setPiece(x, y, p) {
+        this.pieces.push(p);
     }
 }
 
@@ -192,6 +201,7 @@ document.addEventListener("mousedown", function(event){
 
 document.addEventListener("mouseup", function(event){
     mouseDown = false;
+    board.setPiece(event.clientX, event.clientY, currentPiece);
     repaint();
 });
 
