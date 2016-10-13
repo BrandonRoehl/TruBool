@@ -103,7 +103,9 @@ class Board {
     }
 
     setPiece(x, y, p) {
-        this.pieces.push(p);
+        if (p != null) {
+            this.pieces.push(p);
+        }
     }
 }
 
