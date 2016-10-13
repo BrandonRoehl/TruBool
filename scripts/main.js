@@ -86,9 +86,15 @@ class Board {
             canvas.fillStyle = color ? "#555555" : "#333333";
             canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
             if(x < this.pieces.length){
-                canvas.drawImage(pieceAssets[(2 * this.pieces[x]) - 1], this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+                canvas.drawImage(pieceAsset(this.pieces[x], false), this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
             }
         }
+    }
+
+    getPiece(x, y) {
+        (y - this.boardY) / this.unit
+        (x - this.boardX) / this.unit
+        return 1;
     }
 }
 
@@ -97,6 +103,10 @@ var canvas;
 var mouseDown;
 var mouseX, mouseY;
 var pieceAssets;
+var currentPiece;
+
+// This will return the image that is associated with a piece number then the given state if on or off
+function pieceAsset(num, bool) { return pieceAssets[(2 * num) - (bool ? 2 : 1)]; }
 
 document.addEventListener("DOMContentLoaded", function(event){
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
@@ -176,6 +186,7 @@ document.addEventListener("mousedown", function(event){
     mouseX = event.clientX;
     mouseY = event.clientY;
     mouseDown = true;
+    currentPiece = board.getPiece(event.clientX, event.clientY);
     repaint();
 });
 
@@ -195,9 +206,9 @@ document.addEventListener("mousemove", function(event){
 function repaint(){
     clear(canvas);
     board.draw(canvas);
-    if (mouseDown) {
+    if (mouseDown && currentPiece != null) {
         canvas.fillStyle = "#ffffff";
-        canvas.drawImage(pieceAssets[0], mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
+        canvas.drawImage(pieceAsset(currentPiece, false), mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
 }
 
