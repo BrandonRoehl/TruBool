@@ -107,7 +107,7 @@ class Board {
             var cy = Math.trunc((y - this.boardY) / this.unit);
             if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && this.layout[cx][cy] != 0) {
                 tmp = this.layout[cx][cy];
-                this.layout[cx][cy] = null;
+                this.layout[cx][cy] = undefined;
                 return tmp;
             }
         }
@@ -118,7 +118,7 @@ class Board {
         if (p != null) {
             var cx = Math.trunc((x - this.boardX) / this.unit);
             var cy = Math.trunc((y - this.boardY) / this.unit);
-            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && this.layout[cx][cy] == null) {
+            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && [0, null, undefined].includes(this.layout[cx][cy])) {
                 this.layout[cx][cy] = p;
             } else {
                 this.pieces.push(p);
@@ -136,7 +136,13 @@ var wireAssets;
 var currentPiece;
 
 // This will return the image that is associated with a piece number then the given state if on or off
-function pieceAsset(num, bool) { return pieceAssets[(2 * num) - (bool ? 2 : 1)]; }
+function pieceAsset(num, bool) { 
+    if (num > 0) {
+        return pieceAssets[(2 * num) - (bool ? 2 : 1)];
+    } else if (num == 0) {
+        return wireAssets[1];
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function(event){
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
