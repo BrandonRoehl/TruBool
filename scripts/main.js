@@ -1,4 +1,6 @@
 class Board {
+    // Creates a new board object
+    // This is the stuff that should be coming from the view
     constructor(width, height, gameWidth, gameHeight, inputs, outputs, pieces){
         this.layout = new Array(gameWidth);
         for(var i = 0; i < gameWidth; i++){
@@ -11,24 +13,23 @@ class Board {
         this.pieces = pieces;
     }
 
+    // Uses "private" vars so we also calc dim unit size
     set width(width){
         this._width = width;
         this.updateBoardDim();
     }
-
     get width(){
         return this._width;
     }
-
     set height(height){
         this._height = height;
         this.updateBoardDim();
     }
-
     get height(){
         return this._height;
     }
 
+    // Dinamicaly set the unit scale of pieces based on the new width and height
     updateBoardDim(){
         // Find a scale unit on the board
         // This is the number of pixels a square takes up
@@ -41,60 +42,33 @@ class Board {
         }
     }
 
+    // Returns the private unit calculation
     get unit(){
         return this._unit;
     }
 
-    get boardWidth(){
-        return this.unit * this.gameWidth;
-    }
+    // Commom values that are needed in a lot of places so can be got
+    // as if they were variables themselves
+    get boardWidth() { return this.unit * this.gameWidth; }
+    get boardHeight() { return this.unit * this.gameHeight; }
+    get boardX() { return (this.width - this.boardWidth) / 2; }
+    get boardY() { return ((this.height - this.boardHeight - this.unit) / 2) - 5; }
+    get gameWidth() { return this.layout.length; }
+    get gameHeight() { return this.layout[0].length; }
 
-    get boardHeight(){
-        return this.unit * this.gameHeight;
-    }
+    // These are common calculations that require extra bits of info such as x and y cords
+    getBoardX(x) { return Math.trunc((x - this.boardX) / this.unit); }
+    getBoardY(y) { return Math.trunc((y - this.boardY) / this.unit); }
+    onBoard(x, y) { return 0 <= y && 0 <= x && y < this.gameHeight && x < this.gameWidth}
 
-    get boardX(){
-        return (this.width - this.boardWidth) / 2;
-    }
-
-    get boardY(){
-        return ((this.height - this.boardHeight - this.unit) / 2) - 5;
-    }
-
-    get gameWidth(){
-        return this.layout.length;
-    }
-
-    get gameHeight(){
-        return this.layout[0].length;
-    }
-
-    draw(canvas){
-        canvas.fillStyle = "#000000";
-        canvas.fillRect(this.boardX ,this.boardY, this.boardWidth, this.boardHeight);
-        var color = false;
-        for(var x = 0; x < this.gameWidth; x++){
-            if (this.gameWidth % 2 != 0) color = !color;
-            for(var y = 0; y < this.gameHeight; y++){
-                color = !color;
-                canvas.fillStyle = color ? "#555555" : "#333333";
-                canvas.fillRect(this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
-                var piece = pieceAsset(this.layout[x][y], false);
-                if (piece != null) {
-                    canvas.drawImage(piece, this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
-                }
-            }
-        }
-        for(var x = 0; x < this.gameWidth; x++){
-            color = !color;
-            canvas.fillStyle = color ? "#555555" : "#333333";
-            canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
-            if(x < this.pieces.length){
-                canvas.drawImage(pieceAsset(this.pieces[x], false), this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
-            }
-        }
-    }
-
+    /**
+     * Returns a piece from the board and removes it from the board
+     * based on x and y cordanate location
+     *
+     * @param x corordanate on the canvas that was drawn to
+     * @param y corordanate on the canvas that was drawn to
+     * @return game piece
+     */
     getPiece(x, y) {
         var tmp = (y - this.boardY - this.boardHeight - 10);
         if (tmp > 0 && tmp < this.unit) {
@@ -136,9 +110,31 @@ class Board {
         }
     }
 
-    getBoardX(x) { return Math.trunc((x - this.boardX) / this.unit); }
-    getBoardY(y) { return Math.trunc((y - this.boardY) / this.unit); }
-    onBoard(x, y) { return 0 <= y && 0 <= x && y < this.gameHeight && x < this.gameWidth}
+    draw(canvas){
+        canvas.fillStyle = "#000000";
+        canvas.fillRect(this.boardX ,this.boardY, this.boardWidth, this.boardHeight);
+        var color = false;
+        for(var x = 0; x < this.gameWidth; x++){
+            if (this.gameWidth % 2 != 0) color = !color;
+            for(var y = 0; y < this.gameHeight; y++){
+                color = !color;
+                canvas.fillStyle = color ? "#555555" : "#333333";
+                canvas.fillRect(this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+                var piece = pieceAsset(this.layout[x][y], false);
+                if (piece != null) {
+                    canvas.drawImage(piece, this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+                }
+            }
+        }
+        for(var x = 0; x < this.gameWidth; x++){
+            color = !color;
+            canvas.fillStyle = color ? "#555555" : "#333333";
+            canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+            if(x < this.pieces.length){
+                canvas.drawImage(pieceAsset(this.pieces[x], false), this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+            }
+        }
+    }
 }
 
 var board;
