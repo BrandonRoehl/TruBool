@@ -105,7 +105,7 @@ class Board {
         } else {
             var cx = Math.trunc((x - this.boardX) / this.unit);
             var cy = Math.trunc((y - this.boardY) / this.unit);
-            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth) {
+            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && this.layout[cx][cy] != 0) {
                 tmp = this.layout[cx][cy];
                 this.layout[cx][cy] = null;
                 return tmp;
@@ -132,6 +132,7 @@ var canvas;
 var mouseDown;
 var mouseX, mouseY;
 var pieceAssets;
+var wireAssets;
 var currentPiece;
 
 // This will return the image that is associated with a piece number then the given state if on or off
@@ -140,9 +141,7 @@ function pieceAsset(num, bool) { return pieceAssets[(2 * num) - (bool ? 2 : 1)];
 document.addEventListener("DOMContentLoaded", function(event){
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
     isMouseDown = false;
-
     var gameBoard = document.getElementById("game_board");
-
     var inputs = toLogicArray(gameBoard, "input");
     var outputs = toLogicArray(gameBoard, "output");
     var piecesHTML = Array.from(gameBoard.getElementsByClassName("pieces")[0].getElementsByTagName("div"));
@@ -162,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function(event){
         outputs,
         pieces
     );
-
     console.log(board);
 
     // Read in all the images
@@ -174,12 +172,34 @@ document.addEventListener("DOMContentLoaded", function(event){
         "/images/not-on.svg",
         "/images/not-off.svg"
     ];
-
     pieceAssets = new Array(images.length);
     images.forEach(
         function(element, index){
             pieceAssets[index] = new Image();
             pieceAssets[index].src = element;
+        }
+    );
+
+    // Read in all the images
+    images = [
+        "/images/0-on.svg",
+        "/images/0-off.svg",
+        "/images/1-on.svg",
+        "/images/1-off.svg",
+        "/images/2c-on.svg",
+        "/images/2c-off.svg",
+        "/images/2s-on.svg",
+        "/images/2s-off.svg",
+        "/images/3-on.svg",
+        "/images/3-off.svg",
+        "/images/4-on.svg",
+        "/images/4-off.svg"
+    ];
+    wireAssets = new Array(images.length);
+    images.forEach(
+        function(element, index){
+            wireAssets[index] = new Image();
+            wireAssets[index].src = element;
         }
     );
 
