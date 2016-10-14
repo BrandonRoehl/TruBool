@@ -102,6 +102,14 @@ class Board {
             if (0 <= tmp && tmp < this.pieces.length){
                 return this.pieces.splice(tmp, 1);
             }
+        } else {
+            var cx = Math.trunc((x - this.boardX) / this.unit);
+            var cy = Math.trunc((y - this.boardY) / this.unit);
+            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth) {
+                tmp = this.layout[cx][cy];
+                this.layout[cx][cy] = null;
+                return tmp;
+            }
         }
         return null;
     }
