@@ -79,6 +79,10 @@ class Board {
                 color = !color;
                 canvas.fillStyle = color ? "#555555" : "#333333";
                 canvas.fillRect(this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+                var piece = pieceAsset(this.layout[x][y], false);
+                if (piece != null) {
+                    canvas.drawImage(piece, this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+                }
             }
         }
         for(var x = 0; x < this.gameWidth; x++){
@@ -95,7 +99,7 @@ class Board {
         var tmp = (y - this.boardY - this.boardHeight - 10);
         if (tmp > 0 && tmp < this.unit) {
             tmp = Math.trunc((x - this.boardX) / this.unit);
-            if (tmp < this.pieces.length){
+            if (0 <= tmp && tmp < this.pieces.length){
                 return this.pieces.splice(tmp, 1);
             }
         }
@@ -104,7 +108,13 @@ class Board {
 
     setPiece(x, y, p) {
         if (p != null) {
-            this.pieces.push(p);
+            var cx = Math.trunc((x - this.boardX) / this.unit);
+            var cy = Math.trunc((y - this.boardY) / this.unit);
+            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && this.layout[cx][cy] == null) {
+                this.layout[cx][cy] = p;
+            } else {
+                this.pieces.push(p);
+            }
         }
     }
 }
