@@ -98,14 +98,14 @@ class Board {
     getPiece(x, y) {
         var tmp = (y - this.boardY - this.boardHeight - 10);
         if (tmp > 0 && tmp < this.unit) {
-            tmp = Math.trunc((x - this.boardX) / this.unit);
+            tmp = this.getBoardX(x);
             if (0 <= tmp && tmp < this.pieces.length){
                 return this.pieces.splice(tmp, 1);
             }
         } else {
-            var cx = Math.trunc((x - this.boardX) / this.unit);
-            var cy = Math.trunc((y - this.boardY) / this.unit);
-            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && this.layout[cx][cy] != 0) {
+            var cx = this.getBoardX(x);
+            var cy = this.getBoardY(y);
+            if (this.onBoard(cx, cy)) {
                 tmp = this.layout[cx][cy];
                 this.layout[cx][cy] = undefined;
                 return tmp;
@@ -115,16 +115,30 @@ class Board {
     }
 
     setPiece(x, y, p) {
-        if (p != null) {
-            var cx = Math.trunc((x - this.boardX) / this.unit);
-            var cy = Math.trunc((y - this.boardY) / this.unit);
-            if (0 <= cy && 0 <= cx && cy < this.gameHeight && cx < this.gameWidth && [0, null, undefined].includes(this.layout[cx][cy])) {
+        if (![0, null, undefined].includes(p)) {
+            var cx = this.getBoardX(x);
+            var cy = this.getBoardY(y);
+            if (this.onBoard(cx, cy) && [0, null, undefined].includes(this.layout[cx][cy])) {
                 this.layout[cx][cy] = p;
             } else {
                 this.pieces.push(p);
             }
         }
     }
+
+    toogleWire(x, y, piece) {
+        if ([0, null, undefined].includes(piece)) {
+            var cx = this.getBoardX(x);
+            var cy = this.getBoardY(y);
+            if (this.onBoard(cx, cy) && [0, null, undefined].includes(this.layout[cx][cy])) {
+                this.layout[cx][cy] = (piece == 0) ? undefined : 0;
+            }
+        }
+    }
+
+    getBoardX(x) { return Math.trunc((x - this.boardX) / this.unit); }
+    getBoardY(y) { return Math.trunc((y - this.boardY) / this.unit); }
+    onBoard(x, y) { return 0 <= y && 0 <= x && y < this.gameHeight && x < this.gameWidth}
 }
 
 var board;
@@ -242,6 +256,7 @@ document.addEventListener("mousedown", function(event){
     mouseY = event.clientY;
     mouseDown = true;
     currentPiece = board.getPiece(event.clientX, event.clientY);
+    board.toogleWire(event.clientX, event.clientY, currentPiece);
     repaint();
 });
 
@@ -255,6 +270,7 @@ document.addEventListener("mousemove", function(event){
     if(mouseDown){
         mouseX = event.clientX;
         mouseY = event.clientY;
+        board.toogleWire(event.clientX, event.clientY, currentPiece);
         repaint();
     }
 });
@@ -262,8 +278,7 @@ document.addEventListener("mousemove", function(event){
 function repaint(){
     clear(canvas);
     board.draw(canvas);
-    if (mouseDown && currentPiece != null) {
-        canvas.fillStyle = "#ffffff";
+    if (mouseDown && ![0, null, undefined].includes(currentPiece)) {
         canvas.drawImage(pieceAsset(currentPiece, false), mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
 }
