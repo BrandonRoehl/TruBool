@@ -14,23 +14,23 @@ class Board {
     }
 
     // Uses "private" vars so we also calc dim unit size
-    set width(width){
+    set width(width) {
         this._width = width;
         this.updateBoardDim();
     }
-    get width(){
+    get width() {
         return this._width;
     }
-    set height(height){
+    set height(height) {
         this._height = height;
         this.updateBoardDim();
     }
-    get height(){
+    get height() {
         return this._height;
     }
 
     // Dinamicaly set the unit scale of pieces based on the new width and height
-    updateBoardDim(){
+    updateBoardDim() {
         // Find a scale unit on the board
         // This is the number of pixels a square takes up
         var unitWidth = (this.width - 20) / this.gameWidth;
@@ -43,7 +43,7 @@ class Board {
     }
 
     // Returns the private unit calculation
-    get unit(){
+    get unit() {
         return this._unit;
     }
 
