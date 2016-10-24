@@ -138,26 +138,65 @@ class Board {
 
     draw(canvas){
         var color = false;
-        for(var x = 0; x < this.gameWidth; x++){
+        for (var x = 0; x < this.gameWidth; x++) {
             if (this.gameWidth % 2 != 0) color = !color;
-            for(var y = 0; y < this.gameHeight; y++){
+            for (var y = 0; y < this.gameHeight; y++) {
                 color = !color;
                 canvas.fillStyle = color ? "#111111" : "#222222";
-                canvas.fillRect(this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+                canvas.fillRect(
+                    this.unit * x + this.boardX,
+                    this.unit * y + this.boardY,
+                    this.unit,
+                    this.unit
+                );
                 var piece = pieceAsset(this.layout[x][y], false);
-                if (piece != null) {
-                    canvas.drawImage(piece, this.unit * x + this.boardX, this.unit * y + this.boardY, this.unit, this.unit);
+                if (piece == 0) {
+                    drawWire(x, y, canvas, false);
+                } else if (piece != null) {
+                    canvas.drawImage(
+                        pieceAsset(this.layout[x][y], false),
+                        this.unit * x + this.boardX,
+                        this.unit * y + this.boardY,
+                        this.unit,
+                        this.unit
+                    );
                 }
             }
         }
-        for(var x = 0; x < this.gameWidth; x++){
+        for (var x = 0; x < this.gameWidth; x++) {
             color = !color;
             canvas.fillStyle = color ? "#111111" : "#222222";
-            canvas.fillRect(this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
-            if(x < this.pieces.length){
-                canvas.drawImage(pieceAsset(this.pieces[x], false), this.unit * x + this.boardX, this.boardHeight + this.boardY + 10, this.unit, this.unit);
+            canvas.fillRect(
+                this.unit * x + this.boardX,
+                this.boardHeight + this.boardY + 10,
+                this.unit,
+                this.unit
+            );
+            if (x < this.pieces.length) {
+                canvas.drawImage(
+                    pieceAsset(this.pieces[x], false), 
+                    this.unit * x + this.boardX,
+                    this.boardHeight + this.boardY + 10,
+                    this.unit,
+                    this.unit
+                );
             }
         }
+    }
+    drawWire(x , y, canvas, bool) {
+        var sides = new Array(4);
+        // Left
+        sides[0] = (x > 1 && [0, 1, 2, 3].includes(this.layout[x - 1][y]));
+        // Right
+        sides[1] = (x < this.gameWidth - 1 && [0, 3].includes(this.layout[x + 1][y]));
+        // Top
+        sides[2] = (y > 0 && [0, 1, 2, 3].includes(this.layout[x][y - 1]));
+        // Bottom
+        sides[3] = (y < this.gameHeight - 1 && [0, 1, 2, 3].includes(this.layout[x][y + 1]));
+
+        // This is to test the sides
+        console.log(sides);
+        return sides;
     }
 }
 
@@ -171,11 +210,7 @@ var currentPiece;
 
 // This will return the image that is associated with a piece number then the given state if on or off
 function pieceAsset(num, bool) { 
-    if (num > 0) {
-        return pieceAssets[(2 * num) - (bool ? 2 : 1)];
-    } else if (num == 0) {
-        return wireAssets[1];
-    }
+    if (num > 0) return pieceAssets[(2 * num) - (bool ? 2 : 1)];
 }
 
 document.addEventListener("DOMContentLoaded", function(event){
