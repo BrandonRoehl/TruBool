@@ -149,17 +149,19 @@ class Board {
                     this.unit,
                     this.unit
                 );
-                var piece = pieceAsset(this.layout[x][y], false);
-                if (piece == 0) {
-                    drawWire(x, y, canvas, false);
-                } else if (piece != null) {
-                    canvas.drawImage(
-                        pieceAsset(this.layout[x][y], false),
-                        this.unit * x + this.boardX,
-                        this.unit * y + this.boardY,
-                        this.unit,
-                        this.unit
-                    );
+                if (this.layout[x][y] == 0) {
+                    this.drawWire(x, y, canvas, false);
+                } else {
+                    var piece = pieceAsset(this.layout[x][y], false);
+                    if (piece != null) {
+                        canvas.drawImage(
+                            pieceAsset(this.layout[x][y], false),
+                            this.unit * x + this.boardX,
+                            this.unit * y + this.boardY,
+                            this.unit,
+                            this.unit
+                        );
+                    }
                 }
             }
         }
@@ -183,6 +185,7 @@ class Board {
             }
         }
     }
+
     drawWire(x , y, canvas, bool) {
         var sides = new Array(4);
         // Left
@@ -193,6 +196,11 @@ class Board {
         sides[2] = (y > 0 && [0, 1, 2, 3].includes(this.layout[x][y - 1]));
         // Bottom
         sides[3] = (y < this.gameHeight - 1 && [0, 1, 2, 3].includes(this.layout[x][y + 1]));
+
+        for (var side in sides) {
+            console.log(side ? "1" : "0");
+        }
+        
 
         // This is to test the sides
         console.log(sides);
@@ -280,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function(event){
 
     repaint();
     // This gives it 100ms to actualy load the assets
-    setInterval(repaint, 100);
+    setTimeout(repaint, 10);
 });
 
 // TODO replace this with JSON at some point
@@ -332,6 +340,7 @@ document.addEventListener("mousemove", function(event){
 });
 
 function repaint(){
+    console.log("This was called");
     clear(canvas);
     board.draw(canvas);
     if (mouseDown && ![0, null, undefined].includes(currentPiece)) {
