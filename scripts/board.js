@@ -160,9 +160,9 @@ class Board {
             // Right
             sides[1] = (x < this.gameWidth - 1 && [0, 3].includes(this.layout[x + 1][y]));
             // Top
-            sides[2] = (y > 0 && [0, 1, 2, 3].includes(this.layout[x][y - 1]));
+            sides[2] = (y > 0 && [0, 1, 2].includes(this.layout[x][y - 1]));
             // Bottom
-            sides[3] = (y < this.gameHeight - 1 && [0, 1, 2, 3].includes(this.layout[x][y + 1]));
+            sides[3] = (y < this.gameHeight - 1 && [0, 1, 2].includes(this.layout[x][y + 1]));
 
             var num = 0
             sides.forEach(function(element, index, array){
