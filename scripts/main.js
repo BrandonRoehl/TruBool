@@ -81,7 +81,7 @@ class Board {
             tmp = this.getBoardX(x);
             if (0 <= tmp && tmp < this.pieces.length){
                 // If there is remove the piece from the list and return it
-                return this.pieces.splice(tmp, 1);
+                return this.pieces.splice(tmp, 1)[0];
             }
         } else {
             // Start by seing if the x, y is on the board
@@ -91,6 +91,7 @@ class Board {
                 // If it is remove it and return it
                 tmp = this.layout[cx][cy];
                 this.layout[cx][cy] = undefined;
+                this._updateWire(cx, cy);
                 return tmp;
             }
         }
@@ -113,6 +114,7 @@ class Board {
             if (this.onBoard(cx, cy) && [0, null, undefined].includes(this.layout[cx][cy])) {
                 // If its good add it to the locaiton
                 this.layout[cx][cy] = p;
+                this._updateWire(cx, cy);
             } else {
                 // The spot was invalid so we should add it to the end of the palate so we don't loose it
                 this.pieces.push(p);
