@@ -186,7 +186,6 @@ class Board {
                     this.unit
                 );
                 if (this.layout[x][y] == 0) {
-                    console.log(image);
                     canvas.drawImage(
                         wireAsset(this.wireStyle[x][y], false),
                         this.unit * x + this.boardX,
