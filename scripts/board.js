@@ -145,7 +145,7 @@ class Board {
 
     // Only update the wires around the new one
     _updateWire(x, y) {
-        this._setWire(i, y);
+        this._setWire(x, y);
         if (x > 0) this._setWire(x - 1, y);
         if (x < this.gameWidth - 1) this._setWire(x + 1,  y);
         if (y > 0) this._setWire(x, y - 1);
@@ -156,7 +156,7 @@ class Board {
         if(this.layout[x][y] == 0) {
             var sides = new Array(4);
             // Left
-            sides[0] = (x > 1 && [0, 1, 2, 3].includes(this.layout[x - 1][y]));
+            sides[0] = (x > 0 && [0, 1, 2, 3].includes(this.layout[x - 1][y]));
             // Right
             sides[1] = (x < this.gameWidth - 1 && [0, 3].includes(this.layout[x + 1][y]));
             // Top
