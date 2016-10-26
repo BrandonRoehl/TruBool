@@ -172,7 +172,7 @@ class Board {
         // console.log(this.wireStyle);
     }
 
-    draw(canvas){
+    draw (canvas) {
         var color = false;
         for (var x = 0; x < this.gameWidth; x++) {
             if (this.gameWidth % 2 != 0) color = !color;
@@ -186,7 +186,14 @@ class Board {
                     this.unit
                 );
                 if (this.layout[x][y] == 0) {
-                    this.drawWire(x, y, canvas, false);
+                    console.log(image);
+                    canvas.drawImage(
+                        wireAsset(this.wireStyle[x][y], false),
+                        this.unit * x + this.boardX,
+                        this.unit * y + this.boardY,
+                        this.unit,
+                        this.unit
+                    );
                 } else {
                     var piece = pieceAsset(this.layout[x][y], false);
                     if (piece != null) {
@@ -221,10 +228,6 @@ class Board {
             }
         }
     }
-
-    drawWire(x, y, canvas, bool) {
-        // console.log("Fast");
-    }
 }
 
 var board;
@@ -238,6 +241,15 @@ var currentPiece;
 // This will return the image that is associated with a piece number then the given state if on or off
 function pieceAsset(num, bool) { 
     if (num > 0) return pieceAssets[(2 * num) - (bool ? 2 : 1)];
+}
+
+function wireAsset(string, bool) {
+    var zero = "0".charCodeAt(0);
+    var assets = wireAssets;
+    for (var i = 0; i < 4; i++) {
+        assets = assets[string.charCodeAt(i) - zero];
+    }
+    return assets[bool ? 1 : 0];
 }
 
 document.addEventListener("DOMContentLoaded", function(event){
@@ -279,35 +291,27 @@ document.addEventListener("DOMContentLoaded", function(event){
         function(element, index){
             pieceAssets[index] = new Image();
             pieceAssets[index].src = element;
+            pieceAssets[index].onload = repaint;
         }
     );
-
-    // Read in all the images
-    images = [
-        "/images/0-on.svg",
-        "/images/0-off.svg",
-        "/images/1-on.svg",
-        "/images/1-off.svg",
-        "/images/2c-on.svg",
-        "/images/2c-off.svg",
-        "/images/2s-on.svg",
-        "/images/2s-off.svg",
-        "/images/3-on.svg",
-        "/images/3-off.svg",
-        "/images/4-on.svg",
-        "/images/4-off.svg"
-    ];
-    wireAssets = new Array(images.length);
-    images.forEach(
-        function(element, index){
-            wireAssets[index] = new Image();
-            wireAssets[index].src = element;
+    
+    wireAssets = new Array(2);
+    for (var a = 0; a < 2; a++) {
+        wireAssets[a] = new Array(2);
+        for (var b = 0; b < 2; b++) {
+            wireAssets[a][b] = new Array(2);
+            for (var c = 0; c < 2; c++) {
+                wireAssets[a][b][c] = new Array(2);
+                for (var d = 0; d < 2; d++) {
+                    wireAssets[a][b][c][d] = new Array(2);
+                    for (var e = 0; e < 2; e++) {
+                        wireAssets[a][b][c][d][e] = new Image();
+                        wireAssets[a][b][c][d][e].src = "/images/wires/" + a + "" + b + "" + c + "" + d + "-" + (e == 1 ? "on" : "off") + ".svg";
+                    }
+                }
+            }
         }
-    );
-
-    repaint();
-    // This gives it 100ms to actualy load the assets
-    setTimeout(repaint, 10);
+    }
 });
 
 // TODO replace this with JSON at some point
