@@ -6,6 +6,8 @@ var pieceAssets;
 var wireAssets;
 var currentPiece;
 var FPS = 60;
+var redrawTread;
+// clearInterval(processor); 
 
 // This will return the image that is associated with a piece number then the given state if on or off
 function pieceAsset(num, bool) { 
@@ -77,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(event){
             }
         }
     }
-    setInterval(lazyRedraw, 1000 / FPS);
+    redrawTread = setInterval(lazyRedraw, 1000 / FPS);
 });
 
 // TODO replace this with JSON at some point
