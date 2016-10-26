@@ -163,9 +163,9 @@ class Board {
             // Bottom
             sides[3] = (y < this.gameHeight - 1 && [0, 1, 2, 3].includes(this.layout[x][y + 1]));
 
-            var num = ""
-            sides.forEach(function(element){
-                num += (element ? "1" : "0");
+            var num = 0
+            sides.forEach(function(element, index, array){
+                if (element) num = num | Math.pow(2, array.length - 1 - index);
             });
             this.wireStyle[x][y] = num;
         } else {
@@ -244,13 +244,8 @@ function pieceAsset(num, bool) {
     if (num > 0) return pieceAssets[(2 * num) - (bool ? 2 : 1)];
 }
 
-function wireAsset(string, bool) {
-    var zero = "0".charCodeAt(0);
-    var assets = wireAssets;
-    for (var i = 0; i < 4; i++) {
-        assets = assets[string.charCodeAt(i) - zero];
-    }
-    return assets[bool ? 1 : 0];
+function wireAsset(num, bool) {
+    return wireAssets[num][bool ? 1 : 0];
 }
 
 document.addEventListener("DOMContentLoaded", function(event){
@@ -296,18 +291,19 @@ document.addEventListener("DOMContentLoaded", function(event){
         }
     );
     
-    wireAssets = new Array(2);
+    wireAssets = new Array(16);
     for (var a = 0; a < 2; a++) {
-        wireAssets[a] = new Array(2);
         for (var b = 0; b < 2; b++) {
-            wireAssets[a][b] = new Array(2);
             for (var c = 0; c < 2; c++) {
-                wireAssets[a][b][c] = new Array(2);
                 for (var d = 0; d < 2; d++) {
-                    wireAssets[a][b][c][d] = new Array(2);
+                    var num = a == 1 ? 8 : 0;
+                    if (b == 1) num = num | 4;
+                    if (c == 1) num = num | 2;
+                    if (d == 1) num = num | 1;
+                    wireAssets[num] = new Array(2);
                     for (var e = 0; e < 2; e++) {
-                        wireAssets[a][b][c][d][e] = new Image();
-                        wireAssets[a][b][c][d][e].src = "/images/wires/" + a + "" + b + "" + c + "" + d + "-" + (e == 1 ? "on" : "off") + ".svg";
+                        wireAssets[num][e] = new Image();
+                        wireAssets[num].src = "/images/wires/" + a + "" + b + "" + c + "" + d + "-" + (e == 1 ? "on" : "off") + ".svg";
                     }
                 }
             }
