@@ -6,6 +6,10 @@ class Board {
         for(var i = 0; i < gameWidth; i++){
             this.layout[i] = new Array(gameHeight);
         }
+        this.wireStyle = new Array(gameWidth);
+        for(var i = 0; i < gameWidth; i++){
+            this.wireStyle[i] = new Array(gameHeight);
+        }
         this.width = width;
         this.height = height;
         this.inputs = inputs;
@@ -132,8 +136,40 @@ class Board {
             if (this.onBoard(cx, cy) && [0, null, undefined].includes(this.layout[cx][cy])) {
                 // Then set it to the oposite of the piece given
                 this.layout[cx][cy] = (piece == 0) ? undefined : 0;
+                this._updateWire(cx, cy);
             }
         }
+    }
+
+    // Only update the wires around the new one
+    _updateWire(x, y) {
+        var upperX = (x < this.gameWidth - 1 ? x + 1 : this.gameWidth - 1);
+        for (var i = x < 1 ? 0 : x - 1; i <= upperX; i++) { this._setWire(i, y); }
+        if (y > 0) this._setWire(x, y - 1);
+        if (y < this.gameHeight - 1) this._setWire(x,  y + 1);
+    }
+    _setWire(x , y) {
+        // console.log(x + " " + y);
+        if(this.layout[x][y] == 0) {
+            var sides = new Array(4);
+            // Left
+            sides[0] = (x > 1 && [0, 1, 2, 3].includes(this.layout[x - 1][y]));
+            // Right
+            sides[1] = (x < this.gameWidth - 1 && [0, 3].includes(this.layout[x + 1][y]));
+            // Top
+            sides[2] = (y > 0 && [0, 1, 2, 3].includes(this.layout[x][y - 1]));
+            // Bottom
+            sides[3] = (y < this.gameHeight - 1 && [0, 1, 2, 3].includes(this.layout[x][y + 1]));
+
+            var num = ""
+            sides.forEach(function(element){
+                num += (element ? "1" : "0");
+            });
+            this.wireStyle[x][y] = num;
+        } else {
+            this.wireStyle[x][y] = null;
+        }
+        // console.log(this.wireStyle);
     }
 
     draw(canvas){
@@ -186,25 +222,8 @@ class Board {
         }
     }
 
-    drawWire(x , y, canvas, bool) {
-        var sides = new Array(4);
-        // Left
-        sides[0] = (x > 1 && [0, 1, 2, 3].includes(this.layout[x - 1][y]));
-        // Right
-        sides[1] = (x < this.gameWidth - 1 && [0, 3].includes(this.layout[x + 1][y]));
-        // Top
-        sides[2] = (y > 0 && [0, 1, 2, 3].includes(this.layout[x][y - 1]));
-        // Bottom
-        sides[3] = (y < this.gameHeight - 1 && [0, 1, 2, 3].includes(this.layout[x][y + 1]));
-
-        for (var side in sides) {
-            console.log(side ? "1" : "0");
-        }
-        
-
-        // This is to test the sides
-        console.log(sides);
-        return sides;
+    drawWire(x, y, canvas, bool) {
+        // console.log("Fast");
     }
 }
 
@@ -340,7 +359,6 @@ document.addEventListener("mousemove", function(event){
 });
 
 function repaint(){
-    console.log("This was called");
     clear(canvas);
     board.draw(canvas);
     if (mouseDown && ![0, null, undefined].includes(currentPiece)) {
