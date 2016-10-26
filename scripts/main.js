@@ -101,6 +101,7 @@ function toLogicArray(element, className){
 window.addEventListener("resize", function(event){
     board.width = window.innerWidth;
     board.height = window.innerHeight;
+    redraw();
 });
 
 document.addEventListener("mousedown", function(event){
