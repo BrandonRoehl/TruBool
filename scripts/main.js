@@ -176,8 +176,9 @@ class Board {
 
     draw (canvas) {
         var color = false;
+        var flipColor = this.gameWidth % 2 != 0;
         for (var x = 0; x < this.gameWidth; x++) {
-            if (this.gameWidth % 2 != 0) color = !color;
+            if (flipColor) color = !color;
             for (var y = 0; y < this.gameHeight; y++) {
                 color = !color;
                 canvas.fillStyle = color ? "#111111" : "#222222";
@@ -189,17 +190,17 @@ class Board {
                 );
                 if (this.layout[x][y] == 0) {
                     canvas.drawImage(
-                        wireAsset(this.wireStyle[x][y], false),
+                        wireAsset(this.wireStyle[x][y], true),
                         this.unit * x + this.boardX,
                         this.unit * y + this.boardY,
                         this.unit,
                         this.unit
                     );
                 } else {
-                    var piece = pieceAsset(this.layout[x][y], false);
+                    var piece = pieceAsset(this.layout[x][y], true);
                     if (piece != null) {
                         canvas.drawImage(
-                            pieceAsset(this.layout[x][y], false),
+                            piece,
                             this.unit * x + this.boardX,
                             this.unit * y + this.boardY,
                             this.unit,
@@ -238,7 +239,7 @@ var mouseX, mouseY;
 var pieceAssets;
 var wireAssets;
 var currentPiece;
-var FPS = 30;
+var FPS = 60;
 
 // This will return the image that is associated with a piece number then the given state if on or off
 function pieceAsset(num, bool) { 
