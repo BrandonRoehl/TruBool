@@ -238,6 +238,7 @@ var mouseX, mouseY;
 var pieceAssets;
 var wireAssets;
 var currentPiece;
+var FPS = 30;
 
 // This will return the image that is associated with a piece number then the given state if on or off
 function pieceAsset(num, bool) { 
@@ -303,13 +304,13 @@ document.addEventListener("DOMContentLoaded", function(event){
                     wireAssets[num] = new Array(2);
                     for (var e = 0; e < 2; e++) {
                         wireAssets[num][e] = new Image();
-                        wireAssets[num].src = "/images/wires/" + a + "" + b + "" + c + "" + d + "-" + (e == 1 ? "on" : "off") + ".svg";
+                        wireAssets[num][e].src = "/images/wires/" + a + "" + b + "" + c + "" + d + "-" + (e == 1 ? "on" : "off") + ".svg";
                     }
                 }
             }
         }
     }
-    setInterval(lazyRedraw, 30);
+    setInterval(lazyRedraw, 1000 / FPS);
 });
 
 // TODO replace this with JSON at some point
