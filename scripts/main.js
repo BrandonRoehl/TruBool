@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function(event){
         function(element, index){
             pieceAssets[index] = new Image();
             pieceAssets[index].src = element;
-            pieceAssets[index].onload = repaint;
+            pieceAssets[index].onload = redraw;
         }
     );
     
@@ -311,6 +311,7 @@ document.addEventListener("DOMContentLoaded", function(event){
             }
         }
     }
+    setInterval(lazyRedraw, 30);
 });
 
 // TODO replace this with JSON at some point
@@ -334,7 +335,6 @@ function toLogicArray(element, className){
 window.addEventListener("resize", function(event){
     board.width = window.innerWidth;
     board.height = window.innerHeight;
-    repaint();
 });
 
 document.addEventListener("mousedown", function(event){
@@ -343,13 +343,12 @@ document.addEventListener("mousedown", function(event){
     mouseDown = true;
     currentPiece = board.getPiece(event.clientX, event.clientY);
     board.toogleWire(event.clientX, event.clientY, currentPiece);
-    repaint();
 });
 
 document.addEventListener("mouseup", function(event){
     mouseDown = false;
     board.setPiece(event.clientX, event.clientY, currentPiece);
-    repaint();
+    redraw();
 });
 
 document.addEventListener("mousemove", function(event){
@@ -357,16 +356,18 @@ document.addEventListener("mousemove", function(event){
         mouseX = event.clientX;
         mouseY = event.clientY;
         board.toogleWire(event.clientX, event.clientY, currentPiece);
-        repaint();
     }
 });
 
-function repaint(){
+function redraw(){
     clear(canvas);
     board.draw(canvas);
     if (mouseDown && ![0, null, undefined].includes(currentPiece)) {
         canvas.drawImage(pieceAsset(currentPiece, false), mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
+}
+function lazyRedraw() {
+    if(mouseDown) { redraw(); }
 }
 
 function clear(canvas){
