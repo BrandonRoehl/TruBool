@@ -130,7 +130,7 @@ document.addEventListener("mousemove", function(event){
 
 function redraw(){
     clear(canvas);
-    board.draw(canvas);
+    draw(board, canvas);
     if (mouseDown && ![0, null, undefined].includes(currentPiece)) {
         canvas.drawImage(pieceAsset(currentPiece, false), mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
     }
