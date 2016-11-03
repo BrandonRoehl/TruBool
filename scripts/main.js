@@ -1,16 +1,13 @@
 var board;
-var canvas;
 var mouseDown;
 var mouseX, mouseY;
 var pieceAssets;
 var wireAssets;
 var currentPiece;
-var FPS = 60;
-var redrawTread;
-// clearInterval(processor); 
+// clearInterval(processor);
 
 // This will return the image that is associated with a piece number then the given state if on or off
-function pieceAsset(num, bool) { 
+function pieceAsset(num, bool) {
     if (num > 0) return pieceAssets[(2 * num) - (bool ? 2 : 1)];
 }
 
@@ -19,8 +16,8 @@ function wireAsset(num, bool) {
 }
 
 document.addEventListener("DOMContentLoaded", function(event){
-    canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
-    isMouseDown = false;
+    initCanvas();
+    mouseDown = false;
     var gameBoard = document.getElementById("game_board");
     var inputs = toLogicArray(gameBoard, "input");
     var outputs = toLogicArray(gameBoard, "output");
@@ -60,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function(event){
             pieceAssets[index].onload = redraw;
         }
     );
-    
+
     wireAssets = new Array(16);
     for (var a = 0; a < 2; a++) {
         for (var b = 0; b < 2; b++) {
@@ -79,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function(event){
             }
         }
     }
-    redrawTread = setInterval(lazyRedraw, 1000 / FPS);
 });
 
 // TODO replace this with JSON at some point
@@ -110,11 +106,13 @@ document.addEventListener("mousedown", function(event){
     mouseX = event.clientX;
     mouseY = event.clientY;
     mouseDown = true;
+    startRedraw();
     currentPiece = board.getPiece(event.clientX, event.clientY);
     board.toogleWire(event.clientX, event.clientY, currentPiece);
 });
 
 document.addEventListener("mouseup", function(event){
+    stopRedraw();
     mouseDown = false;
     board.setPiece(event.clientX, event.clientY, currentPiece);
     redraw();
@@ -128,19 +126,3 @@ document.addEventListener("mousemove", function(event){
     }
 });
 
-function redraw(){
-    clear(canvas);
-    draw(board, canvas);
-    if (mouseDown && ![0, null, undefined].includes(currentPiece)) {
-        canvas.drawImage(pieceAsset(currentPiece, false), mouseX - (board.unit * 0.6), mouseY - (board.unit * 0.6), board.unit * 1.2, board.unit * 1.2);
-    }
-}
-function lazyRedraw() {
-    if(mouseDown) { redraw(); }
-}
-
-function clear(canvas){
-    if (canvas != null){
-        canvas.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    }
-}
