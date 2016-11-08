@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g style="filter:url(#_Effect1);">
+        <rect x="0" y="105" width="150" height="300"/>
+    </g>
+    <g>
+        <rect x="0" y="100" width="150" height="300" style="fill:#b2b2b2;"/>
+        <path d="M150,400l-150,0l0,-300l150,0l0,300Zm-140,-290l0,280l130,0l0,-280l-130,0Z" style="fill:#595959;"/>
+    </g>
+    <defs>
+        <filter id="_Effect1" filterUnits="userSpaceOnUse" x="-30" y="75" width="210" height="360">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+        </filter>
+    </defs>
+</svg>
