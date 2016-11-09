@@ -43,8 +43,17 @@ function draw(board, canvas) {
     }
     board.inputLocations.forEach(function(inputLoc){
         canvas.drawImage(
-            portAssets[1],
+            portAssets[0],
             board.boardX,
+            board.unit * inputLoc + board.boardY,
+            board.unit,
+            board.unit
+        );
+    });
+    board.outputLocations.forEach(function(inputLoc){
+        canvas.drawImage(
+            portAssets[2],
+            (board.unit * (board.gameWidth - 1)) + board.boardX,
             board.unit * inputLoc + board.boardY,
             board.unit,
             board.unit
