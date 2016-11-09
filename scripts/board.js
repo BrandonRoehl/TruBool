@@ -10,11 +10,16 @@ class Board {
         for(var i = 0; i < gameWidth; i++){
             this.wireStyle[i] = new Array(gameHeight);
         }
+        this.answer = new Array(gameWidth);
+        for(var i = 0; i < gameWidth; i++){
+            this.answer[i] = new Array(gameHeight);
+        }
         this.inputs = inputs;
         this.outputs = outputs;
         this.pieces = pieces;
         this.width = width;
         this.height = height;
+        this.state = 0;
     }
 
     // Uses "private" vars so we also calc dim unit size
@@ -196,5 +201,27 @@ class Board {
             this.wireStyle[x][y] = null;
         }
         // console.log(this.wireStyle);
+    }
+
+    calculate() {
+        this.answer = new Array(this.gameWidth);
+        for(var i = 0; i < this.gameWidth; i++){
+            this.answer[i] = new Array(this.gameHeight);
+        }
+        // Create new queue
+        var queue = [];
+        // Add the starts to it
+        queue.push(this.inputLocations);
+
+        // Set the starts to the input states
+        board.inputLocations.forEach(
+            function(element, index){
+               this.answers[0][element] = board.inputs[index][this.state]
+            }
+        );
+        this.visited = new Array(this.gameWidth);
+        for(var i = 0; i < this.gameWidth; i++){
+            this.visited[i] = new Array(this.gameHeight);
+        }
     }
 }
