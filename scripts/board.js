@@ -226,10 +226,22 @@ class Board {
         while (queue.length > 0) {
             var loc = queue.shift();
             alert(loc);
-            this.visited = new Array(this.gameWidth);
-            for(var i = 0; i < this.gameWidth; i++){
-                this.visited[i] = new Array(this.gameHeight);
+            if (
+                [1,2].includes(this.layout[loc[0]][loc[1]]) &&
+                    (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != null) &&
+                    (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != null)
+            ){
+                this.visited = new Array(this.gameWidth);
+                for(var i = 0; i < this.gameWidth; i++){
+                    this.visited[i] = new Array(this.gameHeight);
+                }
+                // calulate from that spot
+            } else {
+                queue.push(loc);
             }
         }
+    }
+
+    _calc(x, y) {
     }
 }
