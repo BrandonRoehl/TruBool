@@ -10,11 +10,11 @@ class Board {
         for(var i = 0; i < gameWidth; i++){
             this.wireStyle[i] = new Array(gameHeight);
         }
-        this.width = width;
-        this.height = height;
         this.inputs = inputs;
         this.outputs = outputs;
         this.pieces = pieces;
+        this.width = width;
+        this.height = height;
     }
 
     // Uses "private" vars so we also calc dim unit size
@@ -37,12 +37,26 @@ class Board {
     updateBoardDim() {
         // Find a scale unit on the board
         // This is the number of pixels a square takes up
-        var unitWidth = (this.width - 20) / this.gameWidth;
-        var unitHeight = (this.height - 30) / (this.gameHeight + 1);
+        var unitWidth = Math.trunc((this.width - 20) / this.gameWidth);
+        var unitHeight = Math.trunc((this.height - 30) / (this.gameHeight + 1));
         if (unitWidth < unitHeight) {
             this._unit = unitWidth;
         } else {
             this._unit = unitHeight;
+        }
+        this._inputLocations = new Array(this.inputs.length);
+        var seperation = Math.trunc(this.gameHeight / this.inputs.length);
+        var start = Math.trunc(seperation / 2);
+        this._inputLocations[0] = start;
+        for (var i = 1; i < this.inputs.length; i++) {
+            this._inputLocations[i] = start + (i * seperation);
+        }
+        this._outputLocations = new Array(this.inputs.length);
+        seperation = Math.trunc(this.gameHeight / this.outputs.length);
+        start = Math.trunc(seperation / 2);
+        this._outputLocations[0] = start;
+        for (var i = 1; i < this.outputs.length; i++) {
+            this._outputLocations[i] = start + (i * seperation);
         }
     }
 
@@ -53,12 +67,13 @@ class Board {
 
     // Commom values that are needed in a lot of places so can be got
     // as if they were variables themselves
-    get boardWidth() { return this.unit * this.gameWidth; }
-    get boardHeight() { return this.unit * this.gameHeight; }
-    get boardX() { return (this.width - this.boardWidth) / 2; }
-    get boardY() { return ((this.height - this.boardHeight - this.unit) / 2) - 5; }
     get gameWidth() { return this.layout.length; }
     get gameHeight() { return this.layout[0].length; }
+    get boardWidth() { return this.unit * this.gameWidth; }
+    get boardHeight() { return this.unit * this.gameHeight; }
+    get boardX() { return Math.trunc((this.width - this.boardWidth) / 2); }
+    get boardY() { return Math.trunc((this.height - this.boardHeight - this.unit) / 2) - 5; }
+    get inputLocations() { return this._inputLocations }
 
     // These are common calculations that require extra bits of info such as x and y cords
     getBoardX(x) { return Math.trunc((x - this.boardX) / this.unit); }

@@ -41,6 +41,15 @@ function draw(board, canvas) {
             }
         }
     }
+    board.inputLocations.forEach(function(inputLoc){
+        canvas.drawImage(
+            portAssets[1],
+            board.boardX,
+            board.unit * inputLoc + board.boardY,
+            board.unit,
+            board.unit
+        );
+    });
     for (var x = 0; x < board.gameWidth; x++) {
         color = !color;
         canvas.fillStyle = color ? "#111111" : "#222222";

@@ -3,12 +3,13 @@ var mouseDown;
 var mouseX, mouseY;
 var pieceAssets;
 var wireAssets;
+var portAssets;
 var currentPiece;
 // clearInterval(processor);
 
 // This will return the image that is associated with a piece number then the given state if on or off
 function pieceAsset(num, bool) {
-    if (num > 0) return pieceAssets[(2 * num) - (bool ? 2 : 1)];
+    if (num > 0) return pieceAssets[(2 * num) - (bool ? 1 : 2)];
 }
 
 function wireAsset(num, bool) {
@@ -42,12 +43,12 @@ document.addEventListener("DOMContentLoaded", function(event){
 
     // Read in all the images
     var images = [
-        "/images/and-on.svg",
         "/images/and-off.svg",
-        "/images/or-on.svg",
+        "/images/and-on.svg",
         "/images/or-off.svg",
-        "/images/not-on.svg",
-        "/images/not-off.svg"
+        "/images/or-on.svg",
+        "/images/not-off.svg",
+        "/images/not-on.svg"
     ];
     pieceAssets = new Array(images.length);
     images.forEach(
@@ -55,6 +56,23 @@ document.addEventListener("DOMContentLoaded", function(event){
             pieceAssets[index] = new Image();
             pieceAssets[index].src = element;
             pieceAssets[index].onload = redraw;
+        }
+    );
+
+    // Read in all the images
+    images = [
+        "/images/input-off.svg",
+        "/images/input-on.svg",
+        "/images/output-off.svg",
+        "/images/output-correct.svg",
+        "/images/output-incorrect.svg"
+    ];
+    portAssets = new Array(images.length);
+    images.forEach(
+        function(element, index){
+            portAssets[index] = new Image();
+            portAssets[index].src = element;
+            portAssets[index].onload = redraw;
         }
     );
 
