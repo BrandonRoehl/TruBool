@@ -114,6 +114,7 @@ function stopRedraw() {
 
 function clear(canvas) {
     if (canvas != null){
-        canvas.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        canvas.fillStyle = "#000000"
+        canvas.fillRect(0, 0, window.innerWidth, window.innerHeight);
     }
 }
