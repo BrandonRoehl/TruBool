@@ -6,18 +6,28 @@ function initCanvas() {
 }
 
 function draw(board, canvas) {
-    var color = false;
-    var flipColor = board.gameWidth % 2 != 0;
+    canvas.fillStyle = "#222222";
+    canvas.fillRect(
+        board.boardX - 5,
+        board.boardY - 5,
+        board.boardWidth + 10,
+        board.boardHeight + board.unit + 20
+    );
     for (var x = 0; x < board.gameWidth; x++) {
-        if (flipColor) color = !color;
         for (var y = 0; y < board.gameHeight; y++) {
-            color = !color;
-            canvas.fillStyle = color ? "#111111" : "#222222";
+            canvas.fillStyle = "#111111";
             canvas.fillRect(
                 board.unit * x + board.boardX,
                 board.unit * y + board.boardY,
                 board.unit,
                 board.unit
+            );
+            canvas.fillStyle = "#000000";
+            canvas.fillRect(
+                board.unit * x + board.boardX + 5,
+                board.unit * y + board.boardY + 5,
+                board.unit - 10,
+                board.unit - 10
             );
             if (board.layout[x][y] != null) {
                 canvas.drawImage(
@@ -64,13 +74,19 @@ function draw(board, canvas) {
         }
     );
     for (var x = 0; x < board.gameWidth; x++) {
-        color = !color;
-        canvas.fillStyle = color ? "#111111" : "#222222";
+        canvas.fillStyle = "#333333";
         canvas.fillRect(
             board.unit * x + board.boardX,
             board.boardHeight + board.boardY + 10,
             board.unit,
             board.unit
+        );
+        canvas.fillStyle = "#222222";
+        canvas.fillRect(
+            board.unit * x + board.boardX + 5,
+            board.boardHeight + board.boardY + 15,
+            board.unit - 10,
+            board.unit - 10
         );
         if (x < board.pieces.length) {
             canvas.drawImage(
