@@ -169,18 +169,23 @@ class Board {
     }
     _setWire(x , y) {
         // console.log(x + " " + y);
-        if(this.layout[x][y] == 0) {
+        if(this.layout[x][y] != null) {
             var sides = new Array(4);
             // Left
-            sides[0] = (x == 0 && this.inputLocations.includes(y))
-                || (x > 0 && [0, 1, 2, 3].includes(this.layout[x - 1][y]));
+            sides[0] = [0, 3].includes(this.layout[x][y])
+                && ((x == 0 && this.inputLocations.includes(y))
+                || (x > 0 && [0, 1, 2, 3].includes(this.layout[x - 1][y])));
             // Right
             sides[1] = (x == (this.gameWidth - 1) && this.outputLocations.includes(y))
                 || (x < this.gameWidth - 1 && [0, 3].includes(this.layout[x + 1][y]));
             // Top
-            sides[2] = (y > 0 && [0, 1, 2].includes(this.layout[x][y - 1]));
-            // Bottom
-            sides[3] = (y < this.gameHeight - 1 && [0, 1, 2].includes(this.layout[x][y + 1]));
+            if (this.layout[x][y] != 3) {
+                sides[2] = (y > 0 && [0, 1, 2].includes(this.layout[x][y - 1]));
+                // Bottom
+                sides[3] = (y < this.gameHeight - 1 && [0, 1, 2].includes(this.layout[x][y + 1]));
+            } else {
+                sides[2] = sides[3] = false;
+            }
 
             var num = 0
             sides.forEach(function(element, index, array){

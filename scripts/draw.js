@@ -19,7 +19,7 @@ function draw(board, canvas) {
                 board.unit,
                 board.unit
             );
-            if (board.layout[x][y] == 0) {
+            if (board.layout[x][y] != null) {
                 canvas.drawImage(
                     wireAsset(board.wireStyle[x][y], true),
                     board.unit * x + board.boardX,
@@ -27,18 +27,18 @@ function draw(board, canvas) {
                     board.unit,
                     board.unit
                 );
-            } else {
-                var piece = pieceAsset(board.layout[x][y], true);
-                if (piece != null) {
-                    canvas.drawImage(
-                        piece,
-                        board.unit * x + board.boardX,
-                        board.unit * y + board.boardY,
-                        board.unit,
-                        board.unit
-                    );
-                }
             }
+            var piece = pieceAsset(board.layout[x][y], true);
+            if (piece != null) {
+                canvas.drawImage(
+                    piece,
+                    board.unit * x + board.boardX,
+                    board.unit * y + board.boardY,
+                    board.unit,
+                    board.unit
+                );
+            }
+
         }
     }
     board.inputLocations.forEach(function(inputLoc){
