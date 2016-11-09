@@ -210,18 +210,26 @@ class Board {
         }
         // Create new queue
         var queue = [];
-        // Add the starts to it
-        queue.push(this.inputLocations);
 
-        // Set the starts to the input states
-        board.inputLocations.forEach(
-            function(element, index){
-               this.answers[0][element] = board.inputs[index][this.state]
+        { // Set the starts to the input states
+            var board = this;
+            board.inputLocations.forEach(
+                function(element, index){
+                    board.answer[0][element] = board.inputs[index][board.state]
+                    queue.push([0, element]);
+                }
+            );
+        }
+
+        console.log(queue);
+        alert(queue);
+        while (queue.length > 0) {
+            var loc = queue.shift();
+            alert(loc);
+            this.visited = new Array(this.gameWidth);
+            for(var i = 0; i < this.gameWidth; i++){
+                this.visited[i] = new Array(this.gameHeight);
             }
-        );
-        this.visited = new Array(this.gameWidth);
-        for(var i = 0; i < this.gameWidth; i++){
-            this.visited[i] = new Array(this.gameHeight);
         }
     }
 }
