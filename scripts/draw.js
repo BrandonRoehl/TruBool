@@ -31,14 +31,14 @@ function draw(board, canvas) {
             );
             if (board.layout[x][y] != null) {
                 canvas.drawImage(
-                    wireAsset(board.wireStyle[x][y], true),
+                    wireAsset(board.wireStyle[x][y], board.answer[x][y]),
                     board.unit * x + board.boardX,
                     board.unit * y + board.boardY,
                     board.unit,
                     board.unit
                 );
             }
-            var piece = pieceAsset(board.layout[x][y], true);
+            var piece = pieceAsset(board.layout[x][y], board.answer[x][y]);
             if (piece != null) {
                 canvas.drawImage(
                     piece,
