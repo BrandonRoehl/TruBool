@@ -244,6 +244,7 @@ class Board {
                 switch (this.layout[loc[0]][loc[1]]) {
                     case 0:
                         // Wire
+                        this.visited[loc[0]][loc[1]] = false;
                         calcWire(loc[0], loc[1]);
                         break;
                     case 1:
@@ -270,20 +271,27 @@ class Board {
     calcWire(x, y) {
         // This is so we don't get stuck in an infinite loop
         // Only wires check for running loops
-        if (onBoard(x, y) || this.visited[x][y]) return;
+        if (!onBoard(x, y) || this.visited[x][y]) return;
         this.visited[x][y] = true;
         if ([1,2].includes(this.visited[x][y])) {
             this.queue.push(this.visited[x][y])
         } else if (this.visited[x][y] == 3) {
             calcNot(x, y);
         } else {
-            // TODO calc
+            // If any of the surrounding are true that the wire is true
+            // only calculate the up and down if it is a wire
+            this.answer[x][y] = (
+                (onBoard(x + 1, y) && this.answer[x + 1][y]) ||
+                (onBoard(x - 1, y) && this.answer[x - 1][y]) ||
+                (onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
+                (onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+            )
 
             // Only wires are omnidirectional
-            calcWire(x + 1, y);
-            calcWire(x - 1, y);
             calcWire(x, y + 1);
             calcWire(x, y - 1);
+            calcWire(x + 1, y);
+            calcWire(x - 1, y);
         }
     }
     calcAnd(x, y) {
