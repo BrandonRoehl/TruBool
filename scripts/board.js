@@ -209,7 +209,7 @@ class Board {
             this.answer[i] = new Array(this.gameHeight);
         }
         // Create new queue
-        var queue = [];
+        this.queue = [];
 
         { // Set the starts to the input states
             var board = this;
@@ -221,32 +221,81 @@ class Board {
             );
         }
 
-        console.log(queue);
-        alert(queue);
+        console.log(this.queue);
+        alert(this.queue);
         var num = 0;
-        while (queue.length > 0) {
-            var loc = queue.shift();
+        while (this.queue.length > 0) {
+            var loc = this.queue.shift();
             alert(loc);
-            if (queue.length > num &&
+            if (this.queue.length > num &&
                 (
                     [1,2].includes(this.layout[loc[0]][loc[1]]) &&
                         (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != null) &&
                         (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != null)
                 )
             ){
+                // calulate from that spot
                 this.visited = new Array(this.gameWidth);
                 for(var i = 0; i < this.gameWidth; i++){
                     this.visited[i] = new Array(this.gameHeight);
                 }
-                // calulate from that spot
+                this.visited[loc[0]][loc[1]] = true;
+                // Switch the thing we are on every component calculates differently
+                switch (this.layout[loc[0]][loc[1]]) {
+                    case 0:
+                        // Wire
+                        calcWire(loc[0], loc[1]);
+                        break;
+                    case 1:
+                        // And
+                        calcAnd(loc[0], loc[1]);
+                        break;
+                    case 2:
+                        // Or
+                        calcOr(loc[0], loc[1]);
+                        break;
+                    case 3:
+                        // Not
+                        calcNot(loc[0], loc[1]);
+                        break;
+                }
                 num = 0;
             } else {
-                queue.push(loc);
+                this.queue.push(loc);
                 num += 1;
             }
         }
     }
 
-    _calc(x, y) {
+    calcWire(x, y) {
+        // This is so we don't get stuck in an infinite loop
+        // Only wires check for running loops
+        if (onBoard(x, y) || this.visited[x][y]) return;
+        this.visited[x][y] = true;
+        if ([1,2].includes(this.visited[x][y])) {
+            this.queue.push(this.visited[x][y])
+        } else if (this.visited[x][y] == 3) {
+            calcNot(x, y);
+        } else {
+            // TODO calc
+
+            // Only wires are omnidirectional
+            calcWire(x + 1, y);
+            calcWire(x - 1, y);
+            calcWire(x, y + 1);
+            calcWire(x, y - 1);
+        }
+    }
+    calcAnd(x, y) {
+        // TODO calc
+        calcWire(x + 1, y);
+    }
+    calcOr(x, y) {
+        // TODO calc
+        calcWire(x + 1, y);
+    }
+    calcNot(x, y) {
+        // TODO calc
+        calcWire(x + 1, y);
     }
 }
