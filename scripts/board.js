@@ -223,21 +223,26 @@ class Board {
 
         console.log(queue);
         alert(queue);
+        var num = 0;
         while (queue.length > 0) {
             var loc = queue.shift();
             alert(loc);
-            if (
-                [1,2].includes(this.layout[loc[0]][loc[1]]) &&
-                    (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != null) &&
-                    (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != null)
+            if (queue.length > num &&
+                (
+                    [1,2].includes(this.layout[loc[0]][loc[1]]) &&
+                        (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != null) &&
+                        (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != null)
+                )
             ){
                 this.visited = new Array(this.gameWidth);
                 for(var i = 0; i < this.gameWidth; i++){
                     this.visited[i] = new Array(this.gameHeight);
                 }
                 // calulate from that spot
+                num = 0;
             } else {
                 queue.push(loc);
+                num += 1;
             }
         }
     }
