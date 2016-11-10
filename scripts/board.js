@@ -226,49 +226,51 @@ class Board {
         var num = 0;
         while (this.queue.length > 0) {
             var loc = this.queue.shift();
-            if (this.queue.length < num ||
-                ([0, 3].includes(this.layout[loc[0]][loc[1]])) ||
-                    (
-                        [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
-                            (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != undefined) &&
-                            (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != undefined)
-                    )
-            ) {
-                // calulate from that spot
-                this.visited = new Array(this.gameWidth);
-                for(var i = 0; i < this.gameWidth; i++){
-                    this.visited[i] = new Array(this.gameHeight);
-                }
-                this.visited[loc[0]][loc[1]] = true;
-                // Switch the thing we are on every component calculates differently
-                switch (this.layout[loc[0]][loc[1]]) {
-                    case 0:
-                        // Wire
-                        this.visited[loc[0]][loc[1]] = false;
-                        this.calcWire(loc[0] + 1, loc[1]);
-                        this.calcWire(loc[0], loc[1] + 1);
-                        this.calcWire(loc[0], loc[1] - 1);
-                        break;
-                    case 1:
-                        // And
-                        this.calcAnd(loc[0], loc[1]);
-                        break;
-                    case 2:
-                        // Or
-                        this.calcOr(loc[0], loc[1]);
-                        break;
-                    case 3:
-                        // Not
-                        this.calcNot(loc[0], loc[1]);
-                        break;
-                }
-                num = 0;
-            } else if (!(
+            if (!(
                 [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
                     this.answer[loc[0]][loc[1]] != null
             )) {
-                this.queue.push(loc);
-                num += 1;
+                if (this.queue.length < num ||
+                    ([0, 3].includes(this.layout[loc[0]][loc[1]])) ||
+                        (
+                            [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
+                                (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != undefined) &&
+                                (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != undefined)
+                        )
+                ) {
+                    // calulate from that spot
+                    this.visited = new Array(this.gameWidth);
+                    for(var i = 0; i < this.gameWidth; i++){
+                        this.visited[i] = new Array(this.gameHeight);
+                    }
+                    this.visited[loc[0]][loc[1]] = true;
+                    // Switch the thing we are on every component calculates differently
+                    switch (this.layout[loc[0]][loc[1]]) {
+                        case 0:
+                            // Starting wire only
+                            this.visited[loc[0]][loc[1]] = false;
+                            this.calcWire(loc[0] + 1, loc[1]);
+                            this.calcWire(loc[0], loc[1] + 1);
+                            this.calcWire(loc[0], loc[1] - 1);
+                            break;
+                        case 1:
+                            // And
+                            this.calcAnd(loc[0], loc[1]);
+                            break;
+                        case 2:
+                            // Or
+                            this.calcOr(loc[0], loc[1]);
+                            break;
+                        case 3:
+                            // Not
+                            this.calcNot(loc[0], loc[1]);
+                            break;
+                    }
+                    num = 0;
+                } else {
+                    this.queue.push(loc);
+                    num += 1;
+                }
             }
         }
         console.log(this.answer);
