@@ -171,6 +171,7 @@ class Board {
         if (x < this.gameWidth - 1) this._setWire(x + 1,  y);
         if (y > 0) this._setWire(x, y - 1);
         if (y < this.gameHeight - 1) this._setWire(x,  y + 1);
+        this.calculate();
     }
     _setWire(x , y) {
         // console.log(x + " " + y);
@@ -222,8 +223,6 @@ class Board {
             );
         }
 
-        console.log(this.queue);
-        alert(this.queue);
         var num = 0;
         while (this.queue.length > 0) {
             var loc = this.queue.shift();
@@ -246,7 +245,9 @@ class Board {
                     case 0:
                         // Wire
                         this.visited[loc[0]][loc[1]] = false;
-                        this.calcWire(loc[0], loc[1]);
+                        this.calcWire(loc[0] + 1, loc[1]);
+                        this.calcWire(loc[0], loc[1] + 1);
+                        this.calcWire(loc[0], loc[1] - 1);
                         break;
                     case 1:
                         // And
@@ -266,8 +267,6 @@ class Board {
                 this.queue.push(loc);
                 num += 1;
             }
-            console.log(this.queue);
-            alert(loc.toString() + " " + num.toString() + " " + this.queue.length.toString());
         }
         console.log(this.answer);
     }
@@ -278,7 +277,7 @@ class Board {
         if (!this.onBoard(x, y) || this.visited[x][y]) return;
         this.visited[x][y] = true;
         if ([1, 2].includes(this.layout[x][y])) {
-            this.queue.push(this.visited[x][y])
+            this.queue.push([x, y]);
         } else if (this.layout[x][y] == 3) {
             this.calcNot(x, y);
         } else if (this.layout[x][y] == 0) {
@@ -304,7 +303,7 @@ class Board {
             (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
                 (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
         );
-        calcWire(x + 1, y);
+        this.calcWire(x + 1, y);
     }
     calcOr(x, y) {
         // TODO calc
@@ -312,13 +311,13 @@ class Board {
             (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
                 (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
         );
-        calcWire(x + 1, y);
+        this.calcWire(x + 1, y);
     }
     calcNot(x, y) {
         // TODO calc
         this.answer[x][y] = !(
             (this.onBoard(x - 1, y) && this.answer[x - 1][y])
         );
-        calcWire(x + 1, y);
+        this.calcWire(x + 1, y);
     }
 }
