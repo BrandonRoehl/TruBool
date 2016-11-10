@@ -227,8 +227,13 @@ class Board {
         while (this.queue.length > 0) {
             var loc = this.queue.shift();
             if (this.queue.length < num ||
-                ([0, 3].includes(this.layout[loc[0]][loc[1]]))
-            ){
+                ([0, 3].includes(this.layout[loc[0]][loc[1]])) ||
+                    (
+                        [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
+                            (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != undefined) &&
+                            (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != undefined)
+                    )
+            ) {
                 // calulate from that spot
                 this.visited = new Array(this.gameWidth);
                 for(var i = 0; i < this.gameWidth; i++){
@@ -260,8 +265,7 @@ class Board {
                 num = 0;
             } else if (!(
                 [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
-                    (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] !== undefined) &&
-                    (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] !== undefined)
+                    this.answer[loc[0]][loc[1]] != null
             )) {
                 this.queue.push(loc);
                 num += 1;
@@ -308,7 +312,7 @@ class Board {
         // TODO calc
         this.answer[x][y] = (
             (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
-                (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+            (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
         );
         this.calcWire(x + 1, y);
     }
