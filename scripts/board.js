@@ -22,6 +22,11 @@ class Board {
         this.state = 0;
     }
 
+    nextState() {
+        this.state += 1;
+        this.state %= this.inputs[0].length;
+    }
+
     // Uses "private" vars so we also calc dim unit size
     set width(width) {
         this._width = width;

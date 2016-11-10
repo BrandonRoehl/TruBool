@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function(event){
             }
         }
     }
+    startCycle();
 });
 
 // TODO replace this with JSON at some point
@@ -144,3 +145,19 @@ document.addEventListener("mousemove", function(event){
     }
 });
 
+var cycle;
+function startCycle() {
+    if (cycle == null) {
+        cycle = setInterval(function() {
+            board.nextState();
+            board.calculate();
+            redraw();
+        }, 1000 * 1);
+    }
+}
+function stopCycle() {
+    if (cycle != null) {
+        clearInterval(cycle);
+        cycle = null;
+    }
+}

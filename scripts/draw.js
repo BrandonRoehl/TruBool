@@ -54,7 +54,7 @@ function draw(board, canvas) {
     board.inputLocations.forEach(
         function(element, index){
             canvas.drawImage(
-                portAssets[board.inputs[index][0]],
+                portAssets[board.inputs[index][board.state]],
                 board.boardX,
                 board.unit * element + board.boardY,
                 board.unit,
