@@ -216,7 +216,7 @@ class Board {
             board.inputLocations.forEach(
                 function(element, index){
                     board.answer[0][element] = board.inputs[index][board.state]
-                    queue.push([0, element]);
+                    board.queue.push([0, element]);
                 }
             );
         }
@@ -226,13 +226,13 @@ class Board {
         var num = 0;
         while (this.queue.length > 0) {
             var loc = this.queue.shift();
-            alert(loc);
-            if (this.queue.length > num &&
-                (
-                    [1,2].includes(this.layout[loc[0]][loc[1]]) &&
-                        (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != null) &&
-                        (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != null)
-                )
+            if (this.queue.length < num ||
+                ([0, 3].includes(this.layout[loc[0]][loc[1]])) ||
+                    (
+                        [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
+                            (loc[1] - 1 < 0 || this.answer[loc[0]][loc[1] - 1] != null) &&
+                            (loc[1] + 1 >= this.gameHeight || this.answer[loc[0]][loc[1] + 1] != null)
+                    )
             ){
                 // calulate from that spot
                 this.visited = new Array(this.gameWidth);
@@ -245,19 +245,19 @@ class Board {
                     case 0:
                         // Wire
                         this.visited[loc[0]][loc[1]] = false;
-                        calcWire(loc[0], loc[1]);
+                        this.calcWire(loc[0], loc[1]);
                         break;
                     case 1:
                         // And
-                        calcAnd(loc[0], loc[1]);
+                        this.calcAnd(loc[0], loc[1]);
                         break;
                     case 2:
                         // Or
-                        calcOr(loc[0], loc[1]);
+                        this.calcOr(loc[0], loc[1]);
                         break;
                     case 3:
                         // Not
-                        calcNot(loc[0], loc[1]);
+                        this.calcNot(loc[0], loc[1]);
                         break;
                 }
                 num = 0;
@@ -265,6 +265,8 @@ class Board {
                 this.queue.push(loc);
                 num += 1;
             }
+            console.log(this.queue);
+            alert(loc.toString() + " " + num.toString() + " " + this.queue.length.toString());
         }
     }
 
@@ -273,7 +275,8 @@ class Board {
         // Only wires check for running loops
         if (!onBoard(x, y) || this.visited[x][y]) return;
         this.visited[x][y] = true;
-        if ([1,2].includes(this.visited[x][y])) {
+        console.log(this.answer);
+        if ([1, 2].includes(this.layout[x][y])) {
             this.queue.push(this.visited[x][y])
         } else if (this.visited[x][y] == 3) {
             calcNot(x, y);
@@ -282,10 +285,10 @@ class Board {
             // only calculate the up and down if it is a wire
             this.answer[x][y] = (
                 (onBoard(x + 1, y) && this.answer[x + 1][y]) ||
-                (onBoard(x - 1, y) && this.answer[x - 1][y]) ||
-                (onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
-                (onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
-            )
+                    (onBoard(x - 1, y) && this.answer[x - 1][y]) ||
+                    (onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
+                    (onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+            );
 
             // Only wires are omnidirectional
             calcWire(x, y + 1);
@@ -296,14 +299,25 @@ class Board {
     }
     calcAnd(x, y) {
         // TODO calc
+        this.answer[x][y] = (
+            (onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
+                (onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+        );
         calcWire(x + 1, y);
     }
     calcOr(x, y) {
         // TODO calc
+        this.answer[x][y] = (
+            (onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
+                (onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+        );
         calcWire(x + 1, y);
     }
     calcNot(x, y) {
         // TODO calc
+        this.answer[x][y] = !(
+            (onBoard(x - 1, y) && this.answer[x - 1][y])
+        );
         calcWire(x + 1, y);
     }
 }
