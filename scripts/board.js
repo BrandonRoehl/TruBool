@@ -239,8 +239,6 @@ class Board {
         }
 
         this.calculate();
-
-        console.log(this.answer);
     }
 
     calculate() {
@@ -323,7 +321,6 @@ class Board {
         }
     }
     calcAnd(x, y) {
-        // TODO calc
         this.answer[x][y] = (
             (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
                 (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
@@ -331,7 +328,6 @@ class Board {
         this.calcWire(x + 1, y);
     }
     calcOr(x, y) {
-        // TODO calc
         this.answer[x][y] = (
             (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
             (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
@@ -339,7 +335,6 @@ class Board {
         this.calcWire(x + 1, y);
     }
     calcNot(x, y) {
-        // TODO calc
         this.answer[x][y] = !(
             (this.onBoard(x - 1, y) && this.answer[x - 1][y])
         );
