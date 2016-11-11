@@ -222,7 +222,7 @@ class Board {
             var board = this;
             board.inputLocations.forEach(
                 function(element, index){
-                    board.answer[0][element] = (board.inputs[index][board.state] == 1)
+                    board.answer[0][element] = (board.inputs[index][board.state])
                     board.queue.push([0, element]);
                 }
             );
@@ -326,7 +326,7 @@ class Board {
     calcNot(x, y) {
         // TODO calc
         this.answer[x][y] = !(
-            (this.onBoard(x - 1, y) && this.answer[x - 1][y])
+            (this.onBoard(x + 1, y) && this.answer[x - 1][y])
         );
         this.calcWire(x + 1, y);
     }

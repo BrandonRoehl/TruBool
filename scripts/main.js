@@ -63,9 +63,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     images = [
         "/images/input-off.svg",
         "/images/input-on.svg",
-        "/images/output-off.svg",
-        "/images/output-correct.svg",
-        "/images/output-incorrect.svg"
+        "/images/output-incorrect.svg",
+        "/images/output-correct.svg"
     ];
     portAssets = new Array(images.length);
     images.forEach(
@@ -107,7 +106,7 @@ function toLogicArray(element, className){
             inputs[inputIndex] = new Array(elementsHTML.lenght);
             elementsHTML.forEach(
                 function(element, elementIndex){
-                    inputs[inputIndex][elementIndex] = parseInt(element.innerHTML);
+                    inputs[inputIndex][elementIndex] = parseInt(element.innerHTML) == 1;
                 }
             );
         }

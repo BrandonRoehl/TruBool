@@ -54,7 +54,7 @@ function draw(board, canvas) {
     board.inputLocations.forEach(
         function(element, index){
             canvas.drawImage(
-                portAssets[board.inputs[index][board.state]],
+                portAssets[board.inputs[index][board.state] ? 1 : 0],
                 board.boardX,
                 board.unit * element + board.boardY,
                 board.unit,
@@ -64,8 +64,10 @@ function draw(board, canvas) {
     );
     board.outputLocations.forEach(
         function(element, index){
+            // This is just weird
+            answer = board.answer[board.gameWidth - 1][element] == undefined ? false : board.answer[board.gameWidth - 1][element];
             canvas.drawImage(
-                portAssets[2],
+                portAssets[board.outputs[index][board.state] == answer ? 3 : 2],
                 (board.unit * (board.gameWidth - 1)) + board.boardX,
                 board.unit * element + board.boardY,
                 board.unit,
