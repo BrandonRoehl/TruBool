@@ -237,7 +237,6 @@ class Board {
                 }
             }
         }
-
         this.calculate();
     }
 
@@ -267,8 +266,8 @@ class Board {
                     switch (this.layout[loc[0]][loc[1]]) {
                         case 0:
                             // Starting wire only
-                            this.visited[loc[0]][loc[1]] = false;
                             this.calcWire(loc[0] + 1, loc[1]);
+                            this.calcWire(loc[0] - 1, loc[1]);
                             this.calcWire(loc[0], loc[1] + 1);
                             this.calcWire(loc[0], loc[1] - 1);
                             break;
@@ -299,18 +298,14 @@ class Board {
         // Only wires check for running loops
         if (!this.onBoard(x, y) || this.visited[x][y]) return;
         this.visited[x][y] = true;
-        if ([1, 2].includes(this.layout[x][y])) {
-            this.queue.push([x, y]);
-        } else if (this.layout[x][y] == 3) {
-            this.calcNot(x, y);
-        } else if (this.layout[x][y] == 0) {
+        if (this.layout[x][y] == 0) {
             // If any of the surrounding are true that the wire is true
             // only calculate the up and down if it is a wire
             this.answer[x][y] = (
-                (this.onBoard(x + 1, y) && this.answer[x + 1][y]) ||
-                    (this.onBoard(x - 1, y) && this.answer[x - 1][y]) ||
-                    (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
-                    (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+                (x < this.gameWidth - 1 && this.answer[x + 1][y]) ||
+                    (x > 0 && this.answer[x - 1][y]) ||
+                    (y < this.gameHeight - 1 && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
+                    (y > 0 && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
             );
 
             // Only wires are omnidirectional
@@ -318,25 +313,27 @@ class Board {
             this.calcWire(x, y - 1);
             this.calcWire(x + 1, y);
             this.calcWire(x - 1, y);
+        } else if (this.layout[x][y] > 0) {
+            this.queue.push([x, y]);
         }
     }
     calcAnd(x, y) {
         this.answer[x][y] = (
-            (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
-                (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+            (y < this.gameHeight - 1 && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) &&
+                (y > 0 && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
         );
         this.calcWire(x + 1, y);
     }
     calcOr(x, y) {
         this.answer[x][y] = (
-            (this.onBoard(x, y + 1) && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
-            (this.onBoard(x, y - 1) && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
+            (y < this.gameHeight - 1 && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
+            (y > 0 && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
         );
         this.calcWire(x + 1, y);
     }
     calcNot(x, y) {
         this.answer[x][y] = !(
-            (this.onBoard(x - 1, y) && this.answer[x - 1][y])
+            (x > 0 && this.answer[x - 1][y])
         );
         this.calcWire(x + 1, y);
     }
