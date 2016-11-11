@@ -161,7 +161,7 @@ class Board {
             var cx = this.getBoardX(x);
             var cy = this.getBoardY(y);
             // If the spot was on the board and not a piece
-            if (this.onBoard(cx, cy) && [0, null, undefined].includes(this.layout[cx][cy])) {
+            if (this.onBoard(cx, cy) && [0, null, undefined].includes(this.layout[cx][cy]) && piece == this.layout[cx][cy]) {
                 // Then set it to the oposite of the piece given
                 this.layout[cx][cy] = (piece == 0) ? undefined : 0;
                 this._updateWire(cx, cy);
