@@ -176,7 +176,7 @@ class Board {
         if (x < this.gameWidth - 1) this._setWire(x + 1,  y);
         if (y > 0) this._setWire(x, y - 1);
         if (y < this.gameHeight - 1) this._setWire(x,  y + 1);
-        this.calculate();
+        this.calc();
     }
     _setWire(x , y) {
         // console.log(x + " " + y);
@@ -209,7 +209,7 @@ class Board {
         // console.log(this.wireStyle);
     }
 
-    calculate() {
+    calc() {
         this.answer = new Array(this.gameWidth);
         for(var i = 0; i < this.gameWidth; i++){
             this.answer[i] = new Array(this.gameHeight);
@@ -228,6 +228,22 @@ class Board {
             );
         }
 
+        this.calculate();
+
+        for (var x = 0; x < this.gameWidth; x++) {
+            for (var y = 0; y < this.gameHeight; y++) {
+                if (this.answer[x][y] == null && this.layout[x][y] == 3) {
+                    this.queue.push([x, y]);
+                }
+            }
+        }
+
+        this.calculate();
+
+        console.log(this.answer);
+    }
+
+    calculate() {
         var num = 0;
         while (this.queue.length > 0) {
             var loc = this.queue.shift();
@@ -278,7 +294,6 @@ class Board {
                 }
             }
         }
-        console.log(this.answer);
     }
 
     calcWire(x, y) {
@@ -326,7 +341,7 @@ class Board {
     calcNot(x, y) {
         // TODO calc
         this.answer[x][y] = !(
-            (this.onBoard(x + 1, y) && this.answer[x - 1][y])
+            (this.onBoard(x - 1, y) && this.answer[x - 1][y])
         );
         this.calcWire(x + 1, y);
     }

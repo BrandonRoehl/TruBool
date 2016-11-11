@@ -149,7 +149,7 @@ function startCycle() {
     if (cycle == null) {
         cycle = setInterval(function() {
             board.nextState();
-            board.calculate();
+            board.calc();
             redraw();
         }, 1000 * 1);
     }
