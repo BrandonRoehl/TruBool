@@ -14,3 +14,16 @@ body {
     display: none;
 }
 
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#test {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
+    font-size: 2em;
+}
