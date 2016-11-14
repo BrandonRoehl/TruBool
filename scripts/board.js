@@ -248,10 +248,10 @@ class Board {
         var num = 0;
         while (this.queue.length > 0) {
             var loc = this.queue.shift();
-            if (!(
-                [1, 2].includes(this.layout[loc[0]][loc[1]]) &&
-                    this.answer[loc[0]][loc[1]] != null
-            )) {
+            if (
+                this.layout[loc[0]][loc[1]] == 0 ||
+                    this.answer[loc[0]][loc[1]] == null
+            ) {
                 if (this.queue.length < num ||
                     ([0, 3].includes(this.layout[loc[0]][loc[1]])) ||
                         (
