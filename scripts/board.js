@@ -210,6 +210,10 @@ class Board {
     }
 
     calc() {
+        this.calcState(this.state);
+    }
+
+    calcState(state) {
         this.answer = new Array(this.gameWidth);
         for(var i = 0; i < this.gameWidth; i++){
             this.answer[i] = new Array(this.gameHeight);
@@ -222,7 +226,7 @@ class Board {
             var board = this;
             board.inputLocations.forEach(
                 function(element, index){
-                    board.answer[0][element] = (board.inputs[index][board.state])
+                    board.answer[0][element] = (board.inputs[index][state])
                     board.queue.push([0, element]);
                 }
             );
