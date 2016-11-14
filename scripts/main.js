@@ -163,15 +163,14 @@ function stopCycle() {
 
 function testSolution() {
     var answer = true;
-    var state = 0;
-    for (; answer && state < board.inputs[0].length; state++) {
+    for (var state = 0; answer && state < board.inputs[0].length; state++) {
         board.calcState(state);
         for (var index = 0; answer && index < board.outputLocations.length; index++) {
             var element = board.outputLocations[index];
             // This is just weird
             var temp = board.answer[board.gameWidth - 1][element] == undefined ? false : board.answer[board.gameWidth - 1][element];
-            answer = (board.outputs[index][state] == state);
+            answer = (board.outputs[index][state] == temp);
         }
     }
-    alert(answer.toString() + " State: " + state.toString());
+    alert(answer.toString());
 }

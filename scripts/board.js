@@ -61,7 +61,7 @@ class Board {
         for (var i = 1; i < this.inputs.length; i++) {
             this._inputLocations[i] = start + (i * seperation);
         }
-        this._outputLocations = new Array(this.inputs.length);
+        this._outputLocations = new Array(this.outputs.length);
         seperation = Math.trunc(this.gameHeight / this.outputs.length);
         start = Math.trunc(seperation / 2);
         this._outputLocations[0] = start;
