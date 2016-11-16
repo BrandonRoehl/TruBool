@@ -154,6 +154,7 @@ function startCycle() {
         }, 1000 * 1);
     }
 }
+// I have yet to use this
 function stopCycle() {
     if (cycle != null) {
         clearInterval(cycle);
