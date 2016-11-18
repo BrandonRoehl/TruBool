@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @level.user %>
+</p>
+
+<p>
+  <strong>Inputs:</strong>
+  <%= @level.inputs %>
+</p>
+
+<p>
+  <strong>Outputs:</strong>
+  <%= @level.outputs %>
+</p>
+
+<p>
+  <strong>Pieces:</strong>
+  <%= @level.pieces %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @level.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @level.height %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @level.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @level.description %>
+</p>
+
+<%= link_to 'Edit', edit_level_path(@level) %> |
+<%= link_to 'Back', levels_path %>
