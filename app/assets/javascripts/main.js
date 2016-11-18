@@ -1,3 +1,5 @@
+//= require board
+//= require draw
 var board;
 var mouseDown;
 var mouseX, mouseY;
