@@ -9,13 +9,14 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <!-- <link rel="manifest" href="/manifest.json"> -->
-        <%= stylesheet_link_tag 'game', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <script src="/components/webcomponentsjs/webcomponents.min.js"></script>
+        <link rel="import" href="/components/paper-button/paper-button.html">
+        <%= stylesheet_link_tag 'game', media: 'all', is: "custom-style", 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'game', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-        <link rel="import" href="/components/paper-button/paper-button.html">
     </head>
     <body>
-        <button id="test" onclick="testSolution()">Test</button>
+        <paper-button id="test" onclick="testSolution()" raised>Test</paper-button>
         <canvas height="2160" width="3840"></canvas>
         <div id="game_board">
             <div class="width">15</div>

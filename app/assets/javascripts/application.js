@@ -13,4 +13,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= components/webcomponentsjs/webcomponents-lite.js
