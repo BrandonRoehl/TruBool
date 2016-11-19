@@ -22,3 +22,6 @@
 
 # Ignore vim files
 *.swp
+
+# Ignore make .DS_Strore
+.DS_Strore
