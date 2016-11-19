@@ -11,9 +11,12 @@
         <!-- <link rel="manifest" href="/manifest.json"> -->
         <script src="/components/webcomponentsjs/webcomponents.min.js"></script>
         <link rel="import" href="/components/paper-button/paper-button.html">
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= stylesheet_link_tag 'game', media: 'all', is: 'custom-style', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'game', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+        <%= render "shared/styles" %>
     </head>
     <body>
         <paper-button id="test" onclick="testSolution()" raised>Test</paper-button>

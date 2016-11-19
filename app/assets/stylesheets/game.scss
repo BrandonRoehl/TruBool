@@ -4,7 +4,7 @@
 
 body {
     overflow: hidden;
-    background: #000;
+    background: #111;
 }
 
 #game_board {
@@ -23,15 +23,7 @@ canvas {
     right: 15px;
     z-index: 1;
     // font-size: 2em;
-    background-color: white;
-    color: black;
+    // background-color: white;
+    // color: black;
 }
 
-paper-button {
-    background-color: var(--paper-indigo-500);
-    color: white;
-    --paper-button-raised-keyboard-focus: {
-        background-color: var(--paper-pink-a200) !important;
-        color: white !important;
-    };
-}
