@@ -1,0 +1,10 @@
+{
+  "name": "TruBool",
+  "authors": [
+    "Brandon Roehl"
+  ],
+  "private": true,
+  "dependencies": {
+    "paper-elements": "PolymerElements/paper-elements#^1.0.1"
+  }
+}
