@@ -3,6 +3,58 @@ var canvas;
 
 function initCanvas() {
     canvas = document.getElementsByTagName("canvas")[0].getContext("2d");
+    // Read in all the images
+    var images = [
+        "<%= asset_path('and-off.svg') %>",
+        "<%= asset_path('and-on.svg') %>",
+        "<%= asset_path('or-off.svg') %>",
+        "<%= asset_path('or-on.svg') %>",
+        "<%= asset_path('not-off.svg') %>",
+        "<%= asset_path('not-on.svg') %>"
+    ];
+    pieceAssets = new Array(images.length);
+    images.forEach(
+        function(element, index){
+            pieceAssets[index] = new Image();
+            pieceAssets[index].src = element;
+            pieceAssets[index].onload = redraw;
+        }
+    );
+
+    // Read in all the images
+    images = [
+        "<%= asset_path('input-off.svg') %>",
+        "<%= asset_path('input-on.svg') %>",
+        "<%= asset_path('output-incorrect.svg') %>",
+        "<%= asset_path('output-correct.svg') %>"
+    ];
+    portAssets = new Array(images.length);
+    images.forEach(
+        function(element, index){
+            portAssets[index] = new Image();
+            portAssets[index].src = element;
+            portAssets[index].onload = redraw;
+        }
+    );
+
+    wireAssets = new Array(16);
+    <% for a in (0..1) %>
+        <% for b in (0..1) %>
+            <% for c in (0..1) %>
+                <% for d in (0..1) %>
+                    <% num = a == 1 ? 8 : 0 %>
+                    <% num = num | 4 if b == 1 %>
+                    <% num = num | 2 if c == 1 %>
+                    <% num = num | 1 if d == 1 %>
+    wireAssets[<%= num %>] = new Array(2);
+                    <% for e in (0..1) %>
+    wireAssets[<%= num %>][<%= e %>] = new Image();
+    wireAssets[<%= num %>][<%= e %>].src = "<%= asset_path("wires/#{a}#{b}#{c}#{d}-#{(e == 1 ? "on" : "off")}.svg") %>";
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
 }
 
 function draw(board, canvas) {
@@ -134,4 +186,14 @@ function clear(canvas) {
     if (canvas != null){
         canvas.clearRect(0, 0, window.innerWidth, window.innerHeight);
     }
+}
+
+
+// This will return the image that is associated with a piece number then the given state if on or off
+function pieceAsset(num, bool) {
+    if (num > 0) return pieceAssets[(2 * num) - (bool ? 1 : 2)];
+}
+
+function wireAsset(num, bool) {
+    return wireAssets[num][bool ? 1 : 0];
 }

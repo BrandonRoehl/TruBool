@@ -9,15 +9,6 @@ var portAssets;
 var currentPiece;
 // clearInterval(processor);
 
-// This will return the image that is associated with a piece number then the given state if on or off
-function pieceAsset(num, bool) {
-    if (num > 0) return pieceAssets[(2 * num) - (bool ? 1 : 2)];
-}
-
-function wireAsset(num, bool) {
-    return wireAssets[num][bool ? 1 : 0];
-}
-
 document.addEventListener("DOMContentLoaded", function(event){
     initCanvas();
     mouseDown = false;
@@ -42,59 +33,6 @@ document.addEventListener("DOMContentLoaded", function(event){
         pieces
     );
     console.log(board);
-
-    // Read in all the images
-    var images = [
-        "/images/and-off.svg",
-        "/images/and-on.svg",
-        "/images/or-off.svg",
-        "/images/or-on.svg",
-        "/images/not-off.svg",
-        "/images/not-on.svg"
-    ];
-    pieceAssets = new Array(images.length);
-    images.forEach(
-        function(element, index){
-            pieceAssets[index] = new Image();
-            pieceAssets[index].src = element;
-            pieceAssets[index].onload = redraw;
-        }
-    );
-
-    // Read in all the images
-    images = [
-        "/images/input-off.svg",
-        "/images/input-on.svg",
-        "/images/output-incorrect.svg",
-        "/images/output-correct.svg"
-    ];
-    portAssets = new Array(images.length);
-    images.forEach(
-        function(element, index){
-            portAssets[index] = new Image();
-            portAssets[index].src = element;
-            portAssets[index].onload = redraw;
-        }
-    );
-
-    wireAssets = new Array(16);
-    for (var a = 0; a < 2; a++) {
-        for (var b = 0; b < 2; b++) {
-            for (var c = 0; c < 2; c++) {
-                for (var d = 0; d < 2; d++) {
-                    var num = a == 1 ? 8 : 0;
-                    if (b == 1) num = num | 4;
-                    if (c == 1) num = num | 2;
-                    if (d == 1) num = num | 1;
-                    wireAssets[num] = new Array(2);
-                    for (var e = 0; e < 2; e++) {
-                        wireAssets[num][e] = new Image();
-                        wireAssets[num][e].src = "/images/wires/" + a + "" + b + "" + c + "" + d + "-" + (e == 1 ? "on" : "off") + ".svg";
-                    }
-                }
-            }
-        }
-    }
     startCycle();
 });
 
