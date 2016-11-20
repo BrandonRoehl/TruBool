@@ -11,15 +11,28 @@
         <!-- <link rel="manifest" href="/manifest.json"> -->
         <script src="/components/webcomponentsjs/webcomponents.min.js"></script>
         <link rel="import" href="/components/paper-button/paper-button.html">
+        <link rel="import" href="/components/paper-icon-button/paper-icon-button.html">
+        <%# <link rel="import" href="/components/iron-icons/iron-icons.html"> %>
+        <link rel="import" href="/components/paper-drawer-panel/paper-drawer-panel.html">
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= stylesheet_link_tag 'game', media: 'all', is: 'custom-style', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'game', 'data-turbolinks-track': 'reload' %>
         <%= render "shared/styles" %>
     </head>
-    <body>
-        <paper-button id="test" onclick="testSolution()" raised>Test</paper-button>
-        <canvas height="2160" width="3840"></canvas>
+    <body unresolved>
+        <paper-drawer-panel id="paperDrawerPanel" force-narrow>
+            <div drawer>
+                <button tabindex="0">Options</button>
+                <button tabindex="0">Settings</button>
+                <button tabindex="0" paper-drawer-toggle>Close drawer</button>
+            </div>
+            <div main>
+                <canvas height="2160" width="3840"></canvas>
+                <paper-button id="test" onclick="testSolution()" raised>Test</paper-button>
+                <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+            </div>
+        </paper-drawer-panel>
         <div id="game_board">
             <div class="width">15</div>
             <div class="height">10</div>
