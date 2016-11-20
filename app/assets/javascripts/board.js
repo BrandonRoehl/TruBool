@@ -306,8 +306,8 @@ class Board {
             // If any of the surrounding are true that the wire is true
             // only calculate the up and down if it is a wire
             this.answer[x][y] = (
-                (x < this.gameWidth - 1 && this.answer[x + 1][y]) ||
-                    (x > 0 && this.answer[x - 1][y]) ||
+                    (x < this.gameWidth - 1 && this.answer[x + 1][y] && this.layout[x + 1][y] != null) ||
+                    (x > 0 && this.answer[x - 1][y] && this.layout[x - 1][y] != null) ||
                     (y < this.gameHeight - 1 && this.layout[x][y + 1] == 0 && this.answer[x][y + 1]) ||
                     (y > 0 && this.layout[x][y - 1] == 0 && this.answer[x][y - 1])
             );
