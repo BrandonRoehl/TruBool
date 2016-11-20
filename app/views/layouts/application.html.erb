@@ -8,13 +8,22 @@
         <meta name="theme-color" content="#000">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <script src="/components/webcomponentsjs/webcomponents.min.js"></script>
+        <link rel="import" href="/components/paper-drawer-panel/paper-drawer-panel.html">
+        <link rel="import" href="/components/paper-ripple/paper-ripple.html">
         <!-- <link rel="manifest" href="/manifest.json"> -->
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-        <script src="/components/webcomponentsjs/webcomponents.min.js"></script>
         <%= render "shared/styles" %>
     </head>
     <body>
-        <%= yield %>
+        <paper-drawer-panel id="paperdrawerpanel">
+            <div drawer>
+                <paper-ripple></paper-ripple>
+            </div>
+            <div main>
+                <%= yield %>
+            </div>
+        </paper-drawer-panel>
     </body>
 </html>
