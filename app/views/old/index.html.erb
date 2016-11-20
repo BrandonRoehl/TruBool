@@ -13,8 +13,8 @@
         <link rel="import" href="/components/paper-button/paper-button.html">
         <link rel="import" href="/components/paper-icon-button/paper-icon-button.html">
         <link rel="import" href="/components/iron-icons/iron-icons.html">
-        <link rel="import" href="/components/paper-drawer-panel/paper-drawer-panel.html">
-        <link rel="import" href="/components/paper-menu/paper-menu.html">
+        <link rel="import" href="/components/app-layout/app-drawer-layout/app-drawer-layout.html">
+        <link rel="import" href="/components/app-layout/app-drawer/app-drawer.html">
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= stylesheet_link_tag 'game', media: 'all', is: 'custom-style', 'data-turbolinks-track': 'reload' %>
@@ -23,19 +23,16 @@
         <%= render "levels/game-styles" %>
     </head>
     <body unresolved>
-        <paper-drawer-panel id="paperDrawerPanel" force-narrow>
-            <div drawer>
-                <paper-menu>
-                    <paper-item>Item 1</paper-item>
-                    <paper-item paper-drawer-toggle>Close drawer</paper-item>
-                </paper-menu>
-            </div>
+        <app-drawer-layout id="paperDrawerPanel" force-narrow>
+            <app-drawer swipe-open>
+                <paper-ripple></paper-ripple>
+            </app-drawer>
             <div main>
                 <canvas height="2160" width="3840"></canvas>
                 <paper-button id="test" onclick="testSolution()" raised>Test</paper-button>
-                <paper-icon-button id="menu-toggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+                <paper-icon-button id="menu-toggle" icon="menu" drawer-toggle></paper-icon-button>
             </div>
-        </paper-drawer-panel>
+        </app-drawer-layout>
         <div id="game_board">
             <div class="width">15</div>
             <div class="height">10</div>
