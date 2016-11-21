@@ -20,36 +20,19 @@
         <link rel="import" href="/components/app-layout/app-header-layout/app-header-layout.html">
         <link rel="import" href="/components/app-layout/app-header/app-header.html">
         <link rel="import" href="/components/app-layout/app-toolbar/app-toolbar.html">
-        <link rel="import" href="/components/app-layout/app-scroll-effects/app-scroll-effects.html">
-
-        <link rel="import" href="/components/app-layout/demo/sample-content.html">
+        <link rel="import" href="/components/app-layout/app-scrollpos-control/app-scrollpos-control.html">
         <!-- <link rel="manifest" href="/manifest.json"> -->
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= render "shared/styles" %>
     </head>
     <body>
-        <app-drawer-layout responsive-width="1280px">
+        <app-drawer-layout>
             <app-drawer id="drawer" swipe-open>
                 <%= render "layouts/drawercontent" %>
             </app-drawer>
-            <!-- main panel -->
-            <app-header-layout>
-                <app-header class="main" effects="resize-title" condenses fixed shadow>
-                    <app-toolbar class="top-toolbar">
-                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                        <div condensed-title></div>
-                    </app-toolbar>
-                    <app-toolbar class="bottom-toolbar">
-                        <div main-title></div>
-                    </app-toolbar>
-                </app-header>
-                <div class="content">
-                    <%= yield %>
-                    <sample-content size="10"></sample-content>
-                </div>
-            </app-header-layout>
-            <%# <paper-fab icon="app:create"></paper-fab> %>
+            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+            <%= yield %>
         </app-drawer-layout>
     </body>
 </html>

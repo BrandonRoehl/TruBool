@@ -10,11 +10,18 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <!-- <link rel="manifest" href="/manifest.json"> -->
         <script src="/components/webcomponentsjs/webcomponents.min.js"></script>
+        <link rel="import" href="/components/iron-icons/iron-icons.html">
+
         <link rel="import" href="/components/paper-button/paper-button.html">
         <link rel="import" href="/components/paper-icon-button/paper-icon-button.html">
-        <link rel="import" href="/components/iron-icons/iron-icons.html">
+        <link rel="import" href="/components/paper-item/paper-item.html">
+        <link rel="import" href="/components/paper-listbox/paper-listbox.html">
+
         <link rel="import" href="/components/app-layout/app-drawer-layout/app-drawer-layout.html">
         <link rel="import" href="/components/app-layout/app-drawer/app-drawer.html">
+        <link rel="import" href="/components/app-layout/app-header-layout/app-header-layout.html">
+        <link rel="import" href="/components/app-layout/app-header/app-header.html">
+        <link rel="import" href="/components/app-layout/app-toolbar/app-toolbar.html">
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= stylesheet_link_tag 'game', media: 'all', is: 'custom-style', 'data-turbolinks-track': 'reload' %>
@@ -25,7 +32,7 @@
     <body unresolved>
         <app-drawer-layout id="paperDrawerPanel" force-narrow>
             <app-drawer swipe-open>
-                <paper-ripple></paper-ripple>
+                <%= render "layouts/drawercontent" %>
             </app-drawer>
             <div main>
                 <canvas height="2160" width="3840"></canvas>

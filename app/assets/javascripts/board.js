@@ -337,7 +337,7 @@ class Board {
     }
     calcNot(x, y) {
         this.answer[x][y] = !(
-            (x > 0 && this.answer[x - 1][y])
+            (x > 0 && this.answer[x - 1][y] && this.layout[x - 1][y] != null)
         );
         this.calcWire(x + 1, y);
     }
