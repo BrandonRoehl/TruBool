@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "paper-elements": "PolymerElements/paper-elements#^1.0.1",
-    "iron-icons": "PolymerElements/iron-icons#^1.2.0"
+    "iron-icons": "PolymerElements/iron-icons#^1.2.0",
+    "app-layout": "PolymerElements/app-layout#^0.10.6"
   }
 }
