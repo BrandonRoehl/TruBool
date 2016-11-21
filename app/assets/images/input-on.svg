@@ -10,7 +10,7 @@
     </g>
     <g>
         <g style="filter:url(#_Effect2);">
-            <rect x="0" y="100" width="150" height="300" style="fill:#fd6900;"/>
+            <rect x="0" y="100" width="150" height="300" style="fill:#2196f3;"/>
         </g>
         <g style="filter:url(#_Effect3);">
             <path d="M150,400l-150,0l0,-300l150,0l0,300Zm-140,-290l0,280l130,0l0,-280l-130,0Z" style="fill:#595959;"/>

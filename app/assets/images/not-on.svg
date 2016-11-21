@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g style="filter:url(#_Effect1);"><path d="M475,137.5c0,-62.09 -50.41,-112.5 -112.5,-112.5l-225,0c-62.09,0 -112.5,50.41 -112.5,112.5l0,225c0,62.09 50.41,112.5 112.5,112.5l225,0c62.09,0 112.5,-50.41 112.5,-112.5l0,-225Z" style="fill-opacity:0.301961;"/></g><path d="M475,137.5c0,-62.09 -50.41,-112.5 -112.5,-112.5l-225,0c-62.09,0 -112.5,50.41 -112.5,112.5l0,225c0,62.09 50.41,112.5 112.5,112.5l225,0c62.09,0 112.5,-50.41 112.5,-112.5l0,-225Z" style="fill:#ff6a00;"/><clipPath id="_clip2"><path d="M475,137.5c0,-62.09 -50.41,-112.5 -112.5,-112.5l-225,0c-62.09,0 -112.5,50.41 -112.5,112.5l0,225c0,62.09 50.41,112.5 112.5,112.5l225,0c62.09,0 112.5,-50.41 112.5,-112.5l0,-225Z"/></clipPath><g clip-path="url(#_clip2)"><path d="M100,100l230.282,132.855l39.718,-23.855l30,12l100,96.477l0,182.523l-299.351,0l-100.649,-100l0,-300Z" style="fill-opacity:0;"/><clipPath id="_clip3"><path d="M100,100l230.282,132.855l39.718,-23.855l30,12l100,96.477l0,182.523l-299.351,0l-100.649,-100l0,-300Z"/></clipPath><g clip-path="url(#_clip3)"><path d="M-65.112,241.388l365.112,365.112l241.388,-241.388l-365.111,-365.112l-241.389,241.388Z" style="fill:url(#_Linear4);"/></g></g><g><clipPath id="_clip5"><path d="M360,-135c212.487,0 385,172.513 385,385c0,212.487 -172.513,385 -385,385c-212.487,0 -385,-172.513 -385,-385c0,-212.487 172.513,-385 385,-385Zm0,339.322c25.21,0 45.678,20.468 45.678,45.678c0,25.21 -20.468,45.678 -45.678,45.678c-25.21,0 -45.678,-20.468 -45.678,-45.678c0,-25.21 20.468,-45.678 45.678,-45.678Z"/></clipPath><g clip-path="url(#_clip5)"><path d="M100,100l260,150l-260,150l0,-300Z" style="fill:#fff;"/></g><path d="M360,200c27.596,0 50,22.404 50,50c0,27.596 -22.404,50 -50,50c-27.596,0 -50,-22.404 -50,-50c0,-27.596 22.404,-50 50,-50Zm0,25c13.798,0 25,11.202 25,25c0,13.798 -11.202,25 -25,25c-13.798,0 -25,-11.202 -25,-25c0,-13.798 11.202,-25 25,-25Z" style="fill:#fff;"/></g><defs><filter id="_Effect1" filterUnits="userSpaceOnUse" x="-65" y="-65" width="630" height="630"><feGaussianBlur in="SourceGraphic" stdDeviation="15"/></filter><linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-365.112,-365.112,241.388,-241.388,420.694,485.806)"><stop offset="0%" style="stop-color:#000;stop-opacity:0"/><stop offset="45%" style="stop-color:#000;stop-opacity:0.552941"/><stop offset="100%" style="stop-color:#000;stop-opacity:0.701961"/><stop offset="100%" style="stop-color:#000;stop-opacity:0.701961"/></linearGradient></defs></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g style="filter:url(#_Effect1);">
+        <path d="M475,137.5c0,-62.09 -50.41,-112.5 -112.5,-112.5l-225,0c-62.09,0 -112.5,50.41 -112.5,112.5l0,225c0,62.09 50.41,112.5 112.5,112.5l225,0c62.09,0 112.5,-50.41 112.5,-112.5l0,-225Z" style="fill-opacity:0.301961;"/>
+    </g>
+    <path d="M475,137.5c0,-62.09 -50.41,-112.5 -112.5,-112.5l-225,0c-62.09,0 -112.5,50.41 -112.5,112.5l0,225c0,62.09 50.41,112.5 112.5,112.5l225,0c62.09,0 112.5,-50.41 112.5,-112.5l0,-225Z" style="fill:#2196f3;"/>
+    <clipPath id="_clip2">
+        <path d="M475,137.5c0,-62.09 -50.41,-112.5 -112.5,-112.5l-225,0c-62.09,0 -112.5,50.41 -112.5,112.5l0,225c0,62.09 50.41,112.5 112.5,112.5l225,0c62.09,0 112.5,-50.41 112.5,-112.5l0,-225Z"/>
+    </clipPath>
+    <g clip-path="url(#_clip2)">
+        <path d="M100,100l230.282,132.855l39.718,-23.855l30,12l100,96.477l0,182.523l-299.351,0l-100.649,-100l0,-300Z" style="fill-opacity:0;"/>
+        <clipPath id="_clip3">
+            <path d="M100,100l230.282,132.855l39.718,-23.855l30,12l100,96.477l0,182.523l-299.351,0l-100.649,-100l0,-300Z"/>
+        </clipPath>
+        <g clip-path="url(#_clip3)">
+            <path d="M-65.112,241.388l365.112,365.112l241.388,-241.388l-365.111,-365.112l-241.389,241.388Z" style="fill:url(#_Linear4);"/>
+        </g>
+    </g>
+    <g>
+        <clipPath id="_clip5">
+            <path d="M360,-135c212.487,0 385,172.513 385,385c0,212.487 -172.513,385 -385,385c-212.487,0 -385,-172.513 -385,-385c0,-212.487 172.513,-385 385,-385Zm0,339.322c25.21,0 45.678,20.468 45.678,45.678c0,25.21 -20.468,45.678 -45.678,45.678c-25.21,0 -45.678,-20.468 -45.678,-45.678c0,-25.21 20.468,-45.678 45.678,-45.678Z"/>
+        </clipPath>
+        <g clip-path="url(#_clip5)">
+            <path d="M100,100l260,150l-260,150l0,-300Z" style="fill:#fff;"/>
+        </g>
+        <path d="M360,200c27.596,0 50,22.404 50,50c0,27.596 -22.404,50 -50,50c-27.596,0 -50,-22.404 -50,-50c0,-27.596 22.404,-50 50,-50Zm0,25c13.798,0 25,11.202 25,25c0,13.798 -11.202,25 -25,25c-13.798,0 -25,-11.202 -25,-25c0,-13.798 11.202,-25 25,-25Z" style="fill:#fff;"/>
+    </g>
+    <defs>
+        <filter id="_Effect1" filterUnits="userSpaceOnUse" x="-65" y="-65" width="630" height="630">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="15"/>
+        </filter>
+        <linearGradient id="_Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-365.112,-365.112,241.388,-241.388,420.694,485.806)"><stop offset="0%" style="stop-color:#000;stop-opacity:0"/><stop offset="45%" style="stop-color:#000;stop-opacity:0.552941"/><stop offset="100%" style="stop-color:#000;stop-opacity:0.701961"/></linearGradient>
+    </defs>
+</svg>
