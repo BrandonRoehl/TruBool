@@ -23,4 +23,8 @@ class User < ApplicationRecord
             return "#{self.given_name} #{self.family_name}"
         end
     end
+
+    def picture_scale(size = 512)
+        return self.picture.gsub(/\/photo\.jpg$/, "/s#{size.to_s}-c-mo/photo.jpg")
+    end
 end

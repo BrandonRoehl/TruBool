@@ -4,12 +4,16 @@ class ApplicationController < ActionController::Base
     require 'json'
     require 'open-uri'
     protect_from_forgery with: :exception
-    before_action :redirect_to_root, unless: logged_in?
+    before_action :redirect_to_root, exept: [:root, :login]
     helper_method :current_user, :logged_in?
 
     def login
-        client_init
-        redirect_to(@client.authorization_uri.to_s)
+        unless logged_in?
+            client_init
+            redirect_to(@client.authorization_uri.to_s)
+        else
+            redirect_to root_path
+        end
     end
 
     def oauth
@@ -18,16 +22,17 @@ class ApplicationController < ActionController::Base
         c = @client.fetch_access_token!
         url = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=#{c['access_token']}"
         login_with JSON.parse open(url).read
+        redirect_to root_path
     end
 
-    def old
+    def root
         render file: "old/index", layout: false
     end
 
     private
 
     def redirect_to_root
-        redirect_to root_path
+        redirect_to root_path unless logged_in?
     end
 
     def login_with(info)

@@ -47,14 +47,16 @@ paper-button[raised] {
         font-size: 32px;
     }
 
-    <%="
+    <%=
+        "
     [condensed-title] {
         background-image: url('#{ asset_path "Header-s.svg" }');
     }
     [main-title] {
         background-image: url('#{ asset_path "Header-l.svg" }');
     }
-    "%>
+        ".html_safe
+    %>
 
     .content {
         display: block;
@@ -132,13 +134,15 @@ paper-button[raised] {
         margin: 20px auto;
     }
 
-    .avatar-container .image {
-        background-image: url('https://lh3.googleusercontent.com/-EydON387M9c/AAAAAAAAAAI/AAAAAAAAAAA/AEMOYSDRFyvz7dT0x5KngrOdfBZk2U07gQ/s512-c-mo/photo.jpg');
-        background-size: contain;
-        border-radius: 50%;
-        height: 100%;
-        width: 100%;
-    }
+    <% if logged_in? && current_user.picture.present? %>
+        <%=
+            ".avatar-container .image {
+            background-image: url('#{current_user.picture_scale}');
+            background-size: contain;
+            border-radius: 50%; height: 100%;
+            width: 100%;}".html_safe
+            %>
+    <% end %>
 
     .contact-info {
         margin: 0 20px;
