@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
         @client = Signet::OAuth2::Client.new(
             :authorization_uri => 'https://accounts.google.com/o/oauth2/auth',
             :token_credential_uri =>  'https://www.googleapis.com/oauth2/v4/token',
-            :redirect_uri => 'http://localhost:3000/oauth',
+            :redirect_uri => oauth_url,
             :scope => 'email profile',
 
             :client_id => '831933960744-ltmis3dsek2sn9727ndfmik9fuklg3a4.apps.googleusercontent.com',
