@@ -126,8 +126,6 @@ paper-button[raised] {
 
     .avatar-container {
         position: relative;
-        border: 2px solid var(--paper-blue-900);
-        border-radius: 50%;
         height: 90px;
         padding: 2px;
         width: 90px;
@@ -137,7 +135,7 @@ paper-button[raised] {
     <% if logged_in? && current_user.picture.present? %>
         <%=
             ".avatar-container .image {
-            background-image: url('#{current_user.picture_scale}');
+            background-image: url('#{current_user.picture_scale 90}');
             background-size: contain;
             border-radius: 50%; height: 100%;
             width: 100%;}".html_safe
