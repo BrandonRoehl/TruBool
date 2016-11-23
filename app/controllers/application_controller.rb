@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
             :token_credential_uri =>  'https://www.googleapis.com/oauth2/v4/token',
             :redirect_uri => oauth_url,
             :scope => 'email profile',
-
+            # Client info from Google API console
             :client_id => '831933960744-ltmis3dsek2sn9727ndfmik9fuklg3a4.apps.googleusercontent.com',
             :project_id => 'trubool-150412',
             :auth_provider_x509_cert_url => 'https://www.googleapis.com/oauth2/v1/certs',

@@ -13,8 +13,23 @@
     <% end %>
     <!-- nav menu -->
     <paper-listbox>
-        <paper-item>Home</paper-item>
-        <paper-item>Levels</paper-item>
-        <paper-item>Profile</paper-item>
+        <%= link_to root_path do %>
+            <paper-item>
+                Home
+                <paper-ripple></paper-ripple>
+            </paper-item>
+        <% end %>
+        <%= link_to levels_path do %>
+            <paper-item>
+                Levels
+                <paper-ripple></paper-ripple>
+            </paper-item>
+        <% end %>
+        <%= link_to current_user do %>
+            <paper-item>
+                Profile
+                <paper-ripple></paper-ripple>
+            </paper-item>
+        <% end %>
     </paper-listbox>
 </app-header-layout>
