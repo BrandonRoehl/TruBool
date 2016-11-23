@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
         @client.code = params['code']
         c = @client.fetch_access_token!
         url = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=#{c['access_token']}"
-        result = JSON.parse open(url).read
-        User.from_oauth result
+        login_with JSON.parse open(url).read
     end
 
     def old
@@ -23,6 +22,11 @@ class ApplicationController < ActionController::Base
     end
 
     private
+
+    def login_with(info)
+        @current_user = User.from_oauth info
+        raise @current_user.inspect
+    end
 
     def client_init
         @client = Signet::OAuth2::Client.new(
