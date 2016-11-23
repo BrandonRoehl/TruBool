@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161118220609) do
     t.string   "picture"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["id"], name: "sqlite_autoindex_users_1", unique: true
   end
 
 end

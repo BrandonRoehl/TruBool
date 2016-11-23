@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
         client_init
         @client.code = params['code']
         c = @client.fetch_access_token!
-        url = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=#{c["access_token"]}"
+        url = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=#{c['access_token']}"
         result = JSON.parse open(url).read
-        raise result.inspect
+        User.from_oauth result
     end
 
     def old
