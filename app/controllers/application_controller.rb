@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::Base
+    include ApplicationHelper
     require 'signet/oauth_2/client'
     require 'json'
     require 'open-uri'
     protect_from_forgery with: :exception
-    before_action :login, except: [:oauth]
+    before_action :redirect_to_root, unless: logged_in?
+    helper_method :current_user, :logged_in?
+
     def login
         client_init
         redirect_to(@client.authorization_uri.to_s)
@@ -23,9 +26,13 @@ class ApplicationController < ActionController::Base
 
     private
 
+    def redirect_to_root
+        redirect_to root_path
+    end
+
     def login_with(info)
         @current_user = User.from_oauth info
-        raise @current_user.inspect
+        session[:user_id] = @current_user.id
     end
 
     def client_init

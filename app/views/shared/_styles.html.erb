@@ -8,7 +8,6 @@ paper-button[raised] {
     white-space: nowrap;
 }
 
-
     app-header.main {
         color: #fff;
         background-color: var(--paper-blue-500);
@@ -32,15 +31,6 @@ paper-button[raised] {
         font-size: 16px;
     }
 
-    <%="
-    [condensed-title] {
-        background-image: url('#{ asset_path "Header-s.svg" }');
-    }
-    [main-title] {
-        background-image: url('#{ asset_path "Header-l.svg" }');
-    }
-    "%>
-
     [main-title] {
         position: absolute;
         top: -120px;
@@ -56,6 +46,15 @@ paper-button[raised] {
         /* The difference in font size is used to calculate the scale of the title in the transition. */
         font-size: 32px;
     }
+
+    <%="
+    [condensed-title] {
+        background-image: url('#{ asset_path "Header-s.svg" }');
+    }
+    [main-title] {
+        background-image: url('#{ asset_path "Header-l.svg" }');
+    }
+    "%>
 
     .content {
         display: block;
