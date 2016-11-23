@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
     require 'signet/oauth_2/client'
+    require 'json'
+    require 'open-uri'
     protect_from_forgery with: :exception
     before_action :login, except: [:oauth]
     def login
@@ -11,7 +13,9 @@ class ApplicationController < ActionController::Base
         client_init
         @client.code = params['code']
         c = @client.fetch_access_token!
-        raise c.inspect
+        url = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=#{c["access_token"]}"
+        result = JSON.parse open(url).read
+        raise result.inspect
     end
 
     def old
@@ -23,7 +27,7 @@ class ApplicationController < ActionController::Base
     def client_init
         @client = Signet::OAuth2::Client.new(
             :authorization_uri => 'https://accounts.google.com/o/oauth2/auth',
-            :token_credential_uri =>  'https://www.googleapis.com/oauth2/v3/token',
+            :token_credential_uri =>  'https://www.googleapis.com/oauth2/v4/token',
             :redirect_uri => 'http://localhost:3000/oauth',
             :scope => 'email profile',
 
