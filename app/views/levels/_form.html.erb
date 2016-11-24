@@ -1,8 +1,9 @@
+<link rel="import" href="/components/paper-input/all-imports.html">
+<link rel="import" href="/components/iron-input/iron-input.html">
 <%= form_for(level) do |f| %>
   <% if level.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(level.errors.count, "error") %> prohibited this level from being saved:</h2>
-
       <ul>
       <% level.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,45 +12,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class="field">
+  <paper-input-container>
     <%= f.label :inputs %>
-    <%= f.text_field :inputs %>
-  </div>
+    <%= f.text_field :inputs, is: "iron-input" %>
+  </paper-input-container>
 
-  <div class="field">
+
+  <paper-input-container>
     <%= f.label :outputs %>
-    <%= f.text_field :outputs %>
-  </div>
+    <%= f.text_field :outputs, is: "iron-input" %>
+  </paper-input-container>
 
-  <div class="field">
+  <paper-input-container>
     <%= f.label :pieces %>
-    <%= f.text_field :pieces %>
-  </div>
+    <%= f.text_field :pieces, is: "iron-input" %>
+  </paper-input-container>
 
-  <div class="field">
+  <paper-input-container>
     <%= f.label :width %>
-    <%= f.number_field :width %>
-  </div>
+    <%= f.number_field :width, is: "iron-input" %>
+  </paper-input-container>
 
-  <div class="field">
-    <%= f.label :height %>
-    <%= f.number_field :height %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+  <%# <paper-input label="Name" id="level_name" name="level[name]" auto-validate required></paper-input> %>
+  <%# <paper-input label="Width" id="level_width" name="level[width]" type="number" auto-validate required></paper-input> %>
+  <%# <paper-input label="Height" id="level_height" name="level[height]" type="number" auto-validate required></paper-input> %>
+  <%# <paper-textarea label="Description" id="level_description" name="level[description]" auto-validate required></paper-textarea> %>
 
   <div class="actions">
     <%= f.submit %>
