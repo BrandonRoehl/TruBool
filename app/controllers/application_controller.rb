@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     require 'json'
     require 'open-uri'
     protect_from_forgery with: :exception
-    before_action :login, except: [:root, :login, :oauth]
+    before_action :login, except: [:root, :oauth]
     helper_method :current_user, :logged_in?
 
     def oauth
