@@ -21,7 +21,11 @@ class ApplicationController < ActionController::Base
     end
 
     def root
-        render file: "old/index", layout: false
+        if logged_in?
+            redirect_to levels_path
+        else
+            render file: "content/main", layout: false
+        end
     end
 
     private
