@@ -28,15 +28,10 @@
     <%= f.text_field :pieces, is: "iron-input" %>
   </paper-input-container>
 
-  <paper-input-container>
-    <%= f.label :width %>
-    <%= f.number_field :width, is: "iron-input" %>
-  </paper-input-container>
-
-  <%# <paper-input label="Name" id="level_name" name="level[name]" auto-validate required></paper-input> %>
-  <%# <paper-input label="Width" id="level_width" name="level[width]" type="number" auto-validate required></paper-input> %>
-  <%# <paper-input label="Height" id="level_height" name="level[height]" type="number" auto-validate required></paper-input> %>
-  <%# <paper-textarea label="Description" id="level_description" name="level[description]" auto-validate required></paper-textarea> %>
+  <paper-input label="Name" id="level_name" name="level[name]" auto-validate required></paper-input>
+  <paper-input label="Width" id="level_width" name="level[width]" type="number" auto-validate required></paper-input>
+  <paper-input label="Height" id="level_height" name="level[height]" type="number" auto-validate required></paper-input>
+  <paper-textarea label="Description" id="level_description" name="level[description]" auto-validate required></paper-textarea>
 
   <div class="actions">
     <%= f.submit %>
