@@ -1,5 +1,4 @@
 <link rel="import" href="/components/paper-input/all-imports.html">
-<link rel="import" href="/components/iron-input/iron-input.html">
 <%= form_for(level) do |f| %>
   <% if level.errors.any? %>
     <div id="error_explanation">
@@ -12,26 +11,23 @@
     </div>
   <% end %>
 
+  <%# Need a nested form for the inputs and outputs  %>
+  <%# Save as an inline hash  %>
   <paper-input-container>
     <%= f.label :inputs %>
     <%= f.text_field :inputs, is: "iron-input" %>
   </paper-input-container>
-
 
   <paper-input-container>
     <%= f.label :outputs %>
     <%= f.text_field :outputs, is: "iron-input" %>
   </paper-input-container>
 
-  <paper-input-container>
-    <%= f.label :pieces %>
-    <%= f.text_field :pieces, is: "iron-input" %>
-  </paper-input-container>
-
-  <paper-input label="Name" id="level_name" name="level[name]" auto-validate required></paper-input>
-  <paper-input label="Width" id="level_width" name="level[width]" type="number" auto-validate required></paper-input>
-  <paper-input label="Height" id="level_height" name="level[height]" type="number" auto-validate required></paper-input>
-  <paper-textarea label="Description" id="level_description" name="level[description]" auto-validate required></paper-textarea>
+  <paper-input label="Name" id="level_name" value="<%= level.name %>" name="level[name]" auto-validate required></paper-input>
+  <paper-input label="Pieces" id="level_pieces" value="<%= level.pieces %>" name="level[pieces]" auto-validate required></paper-input>
+  <paper-input label="Width" id="level_width" value="<%= level.width %>" name="level[width]" type="number" auto-validate required></paper-input>
+  <paper-input label="Height" id="level_height" value="<%= level.height %>" name="level[height]" type="number" auto-validate required></paper-input>
+  <paper-textarea label="Description" id="level_description" value="<%= level.description %>" name="level[description]"></paper-textarea>
 
   <div class="actions">
     <%= f.submit %>
