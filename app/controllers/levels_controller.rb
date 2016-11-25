@@ -17,6 +17,8 @@ class LevelsController < ApplicationController
     @level = Level.new
     @level.width = 15
     @level.height = 10
+    @inputs = ['']
+    @outputs = ['']
   end
 
   # GET /levels/1/edit

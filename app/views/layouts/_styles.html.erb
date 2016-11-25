@@ -1,16 +1,17 @@
 <!-- File for polymer component styling -->
 <link rel="import" href="/components/paper-styles/paper-styles.html">
+<%= render "layouts/theme" %>
 <style is="custom-style">
 paper-button[raised] {
     color: white;
     margin: 10px;
-    background: var(--paper-blue-500);
+    background: var(--primary-color);
     white-space: nowrap;
 }
 
     app-header.main {
         color: #fff;
-        background-color: var(--paper-blue-500);
+        background-color: var(--primary-color);
     }
 
     app-toolbar {
@@ -161,7 +162,7 @@ paper-button[raised] {
         height: 54px;
     }
 
-    paper-icon-button {
+    app-toolbar paper-icon-button {
         --paper-icon-button-ink-color: white;
     }
 

@@ -1,4 +1,6 @@
 <link rel="import" href="/components/paper-input/all-imports.html">
+<link rel="import" href="/components/paper-fab/paper-fab.html">
+<link rel="import" href="/components/paper-button/paper-button.html">
 <%= form_for(level) do |f| %>
   <% if level.errors.any? %>
     <div id="error_explanation">
@@ -11,25 +13,45 @@
     </div>
   <% end %>
 
-  <%# Need a nested form for the inputs and outputs  %>
-  <%# Save as an inline hash  %>
-  <paper-input-container>
-    <%= f.label :inputs %>
-    <%= f.text_field :inputs, is: "iron-input" %>
-  </paper-input-container>
-
-  <paper-input-container>
-    <%= f.label :outputs %>
-    <%= f.text_field :outputs, is: "iron-input" %>
-  </paper-input-container>
 
   <paper-input label="Name" id="level_name" value="<%= level.name %>" name="level[name]" auto-validate required></paper-input>
-  <paper-input label="Pieces" id="level_pieces" value="<%= level.pieces %>" name="level[pieces]" auto-validate required></paper-input>
-  <paper-input label="Width" id="level_width" value="<%= level.width %>" name="level[width]" type="number" auto-validate required></paper-input>
-  <paper-input label="Height" id="level_height" value="<%= level.height %>" name="level[height]" type="number" auto-validate required></paper-input>
+
+  <h3>Inputs</h3>
+  <paper-input label="Width" id="level_width" value="<%= level.width %>" name="level[width]" type="number" auto-validate required>
+      <div suffix>units</div>
+  </paper-input>
+  <paper-input label="Height" id="level_height" value="<%= level.height %>" name="level[height]" type="number" auto-validate required>
+      <div suffix>units</div>
+  </paper-input>
+
+  <%# Need a nested form for the inputs and outputs  %>
+  <%# Save as an inline hash  %>
+  <h3>Inputs</h3>
+  <div id="inputs">
+      <% for input in @inputs %>
+          <paper-input label="Input" id="level_input" value="<%= input %>" name="level[input][]" allowed-pattern="[01]" auto-validate required>
+              <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+          </paper-input>
+      <% end %>
+      <paper-fab mini icon="add" onclick="addInput()"></paper-fab>
+  </div>
+
+  <h3>Outputs</h3>
+  <div id="outputs">
+      <% for output in @outputs %>
+          <paper-input label="Output" id="level_output" value="<%= output %>" name="level[output][]" allowed-pattern="[01]" auto-validate required>
+              <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+          </paper-input>
+      <% end %>
+      <paper-fab mini icon="add" onclick="addInput()"></paper-fab>
+  </div>
+  <paper-input label="Pieces" id="level_pieces" value="<%= level.pieces %>" name="level[pieces]" allowed-pattern="[0-9]" auto-validate required></paper-input>
+
   <paper-textarea label="Description" id="level_description" value="<%= level.description %>" name="level[description]"></paper-textarea>
 
   <div class="actions">
-    <%= f.submit %>
+      <paper-button raised onclick="document.getElementById('new_level').submit()" name="commit" value="Create Level" data-disable-with="Create Level">
+          Create Level
+      </paper-button>
   </div>
 <% end %>
