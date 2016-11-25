@@ -2,14 +2,18 @@
 <link rel="import" href="/components/paper-styles/paper-styles.html">
 <style is="custom-style">
 #login-button {
-    color: rgba(0, 0, 0, 0.54);
+    display: table;
     margin: 0 auto 2em auto;
+    text-decoration: none;
+}
+
+#login-button paper-button {
+    color: rgba(0, 0, 0, 0.54);
     background: white;
     white-space: nowrap;
     text-transform: none;
     text-decoration: none;
     font-weight: bold;
-    display: table;
     cursor: pointer;
 }
  #login-button iron-icon {

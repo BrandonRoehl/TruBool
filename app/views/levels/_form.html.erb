@@ -1,6 +1,17 @@
 <link rel="import" href="/components/paper-input/all-imports.html">
 <link rel="import" href="/components/paper-fab/paper-fab.html">
 <link rel="import" href="/components/paper-button/paper-button.html">
+<style>
+#level_height {
+    float: right;
+}
+
+#level_height, #level_width {
+    width: 47%;
+    /* padding-right: 2%; */
+    display: inline-block;
+}
+</style>
 <%= form_for(level) do |f| %>
   <% if level.errors.any? %>
     <div id="error_explanation">
@@ -16,7 +27,7 @@
 
   <paper-input label="Name" id="level_name" value="<%= level.name %>" name="level[name]" auto-validate required></paper-input>
 
-  <h3>Inputs</h3>
+  <h3>Size</h3>
   <paper-input label="Width" id="level_width" value="<%= level.width %>" name="level[width]" type="number" auto-validate required>
       <div suffix>units</div>
   </paper-input>
