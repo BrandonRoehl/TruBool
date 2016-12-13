@@ -1,5 +1,7 @@
-<paper-input label="Input" id="level_input" value="<%= local_assigns[:input].nil? ? String.new : input %>" name="level[input][]" allowed-pattern="[01]" auto-validate required>
-</paper-input>
-<paper-input label="Output" id="level_output" value="<%= local_assigns[:output].nil? ? String.new : output %>" name="level[output][]" allowed-pattern="[01]" auto-validate required>
-    <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
-</paper-input>
+<div class="input_set">
+    <paper-input label="Input" id="level_input" value="<%= local_assigns[:input].nil? ? String.new : input %>" name="level[input][]" allowed-pattern="[01]" auto-validate required>
+    </paper-input>
+    <paper-input label="Output" id="level_output" value="<%= local_assigns[:output].nil? ? String.new : output %>" name="level[output][]" allowed-pattern="[01]" auto-validate required>
+        <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+    </paper-input>
+</div>
