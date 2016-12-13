@@ -28,10 +28,6 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    def old
-        render file: "old/index", layout: false
-    end
-
     private
 
     def login
