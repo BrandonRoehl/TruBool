@@ -1,9 +1,6 @@
-function addInput() {
-}
-
 function clearInput() {
     var node = event.target;
-    while (node.className != "input_set") {
+    while (node.nodeName != "PAPER-INPUT") {
         node = node.parentNode;
         // console.log(node.nodeName);
         // console.log(node);
@@ -15,9 +12,12 @@ function addInput() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("inputs").innerHTML += this.responseText;
+            var toNode = document.createElement('div');
+            toNode.innerHTML = this.response;
+            document.getElementById("inputs").appendChild(toNode.firstChild);
         }
     };
     xhttp.open("GET", "/levels/new/input", true);
     xhttp.send();
 }
+

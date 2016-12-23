@@ -7,22 +7,10 @@
     float: right;
 }
 
-#level_height, #level_width, .input_set paper-input {
+#level_height, #level_width {
     width: 47%;
     /* padding-right: 2%; */
     display: inline-block;
-}
-.input_set {
-    display: block;
-    position: relative;
-    height: 70px;
-}
-.input_set paper-input {
-    position: absolute;
-    bottom: 0;
-}
-.input_set paper-input~paper-input {
-    left: 53%;
 }
 </style>
 <%= form_for(level) do |f| %>
@@ -50,14 +38,23 @@
 
   <%# Need a nested form for the inputs and outputs  %>
   <%# Save as an inline hash  %>
-  <h3>Inputs and Outputs</h3>
+  <h3>Inputs</h3>
   <div id="inputs">
-      <% for i in 0...(@inputs.count < @outputs.count ? @inputs.count : @outputs.count) %>
-          <%= render partial: "input", locals: { input: @inputs[i], output: @outputs[i]} %>
+      <% for input in @inputs %>
+          <%= render partial: "input", locals: {input: input} %>
       <% end %>
   </div>
   <paper-fab mini icon="add" onclick="addInput()"></paper-fab>
 
+  <h3>Outputs</h3>
+  <div id="outputs">
+      <% for output in @outputs %>
+          <paper-input label="Output" id="level_output" value="<%= output %>" name="level[output][]" allowed-pattern="[01]" auto-validate required>
+              <paper-icon-button suffix onclick="clearInput()" icon="clear" alt="clear" title="clear">
+          </paper-input>
+      <% end %>
+      <paper-fab mini icon="add" onclick="addOutput()"></paper-fab>
+  </div>
   <paper-input label="Pieces" id="level_pieces" value="<%= level.pieces %>" name="level[pieces]" allowed-pattern="[0-9]" auto-validate required></paper-input>
 
   <paper-textarea label="Description" id="level_description" value="<%= level.description %>" name="level[description]"></paper-textarea>
