@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :levels do
       collection do
           get 'new/input', to: "levels#ajax_input"
+          get 'new/output', to: "levels#ajax_output"
       end
   end
   resources :users, except: [:edit, :update, :delete, :create, :new]

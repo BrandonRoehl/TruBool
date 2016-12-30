@@ -8,16 +8,24 @@ function clearInput() {
     node.remove();
 }
 
-function addInput() {
+function addElement(type) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var toNode = document.createElement('div');
             toNode.innerHTML = this.response;
-            document.getElementById("inputs").appendChild(toNode.firstChild);
+            document.getElementById(type + "s").appendChild(toNode.firstChild);
         }
     };
-    xhttp.open("GET", "/levels/new/input", true);
+    xhttp.open("GET", "/levels/new/" + type, true);
     xhttp.send();
+}
+
+function addInput() {
+    addElement("input");
+}
+
+function addOutput() {
+    addElement("output");
 }
 

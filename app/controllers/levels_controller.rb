@@ -69,6 +69,10 @@ class LevelsController < ApplicationController
         render "_input", layout: false
     end
 
+    def ajax_output
+        render "_output", layout: false
+    end
+
     def one; render "made/one", layout: "level" end
     def two; render "made/two", layout: "level" end
     def three; render "made/three", layout: "level" end
