@@ -54,13 +54,15 @@
   </div>
   <paper-fab mini icon="add" onclick="addOutput()"></paper-fab>
 
-  <paper-input label="Pieces" id="level_pieces" value="<%= level.pieces %>" name="level[pieces]" allowed-pattern="[0-9,]" auto-validate required></paper-input>
+  <paper-input label="Pieces" id="level_pieces" value="<%= @pieces %>" name="level[pieces]" allowed-pattern="[0-9,]" auto-validate required></paper-input>
 
   <paper-textarea label="Description" id="level_description" value="<%= level.description %>" name="level[description]"></paper-textarea>
 
   <div class="actions">
-      <paper-button raised onclick="document.getElementById('new_level').submit()" name="commit" value="Create Level" data-disable-with="Create Level">
-          Create Level
-      </paper-button>
+      <%= button_tag(type: 'submit', is: "paper-button", style: "") do %>
+          <paper-button raised>
+              Save
+          </paper-button>
+      <% end %>
   </div>
 <% end %>
