@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 20161118220609) do
 
   create_table "levels", force: :cascade do |t|
     t.integer  "user_id",     limit: 16
-    t.string   "inputs"
-    t.string   "outputs"
-    t.string   "pieces"
+    t.string   "JSONinputs"
+    t.string   "JSONoutputs"
+    t.string   "JSONpieces"
     t.integer  "width"
     t.integer  "height"
     t.string   "name"

@@ -24,9 +24,9 @@ class LevelsController < ApplicationController
 
     # GET /levels/1/edit
     def edit
-        @inputs = JSON.parse(@level.inputs)
-        @outputs = JSON.parse(@level.outputs)
-        @pieces = JSON.parse(@level.pieces).join(',')
+        @inputs = @level.inputs
+        @outputs = @level.outputs
+        @pieces = @level.pieces.join(',')
     end
 
     # POST /levels
@@ -90,13 +90,6 @@ class LevelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def level_params
-        # params[:level][:test] = true
-        levelp = params[:level]
-        levelp = levelp.merge(
-            inputs: params[:level][:inputs].to_json,
-            outputs: params[:level][:outputs].to_json,
-            pieces: params[:level][:pieces].split(',').to_json,
-        )
-        levelp = levelp.permit(:user_id, :inputs, :outputs, :pieces, :width, :height, :name, :description)
+        params[:level].permit(:user_id, :inputs, :outputs, :pieces, :width, :height, :name, :description)
     end
 end

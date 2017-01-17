@@ -41,7 +41,13 @@
             </div>
         </app-drawer-layout>
         <div id="game_board">
-            <%= yield %>
+            <div class="width"><%= @level.width %></div>
+            <div class="height"><%= @level.height %></div>
+            <% for input in @level.inputs %>
+                <div class="input"><div>1</div><div>0</div></div>
+            <% end %>
+            <div class="output"><div>1</div><div>0</div></div>
+            <div class="pieces"></div>
         </div>
     </body>
 </html>
