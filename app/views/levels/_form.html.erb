@@ -59,8 +59,8 @@
   <paper-textarea label="Description" id="level_description" value="<%= level.description %>" name="level[description]"></paper-textarea>
 
   <div class="actions">
-      <%= button_tag(type: 'submit', is: "paper-button", style: "") do %>
-          <paper-button raised>
+      <%= button_tag(type: 'submit', is: "paper-button", style: "background-color: transparent; border-color: transparent; padding:0;") do %>
+          <paper-button raised style="font-size: 1.5em;">
               Save
           </paper-button>
       <% end %>

@@ -1,45 +1,44 @@
+<link rel="import" href="/components/paper-fab/paper-fab.html">
 <p id="notice"><%= notice %></p>
 
 <h1>Levels</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Inputs</th>
-      <th>Outputs</th>
-      <th>Pieces</th>
-      <th>Width</th>
-      <th>Height</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Inputs</th>
+			<th>Outputs</th>
+			<th>Pieces</th>
+			<th>Width</th>
+			<th>Height</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th colspan="3"></th>
+		</tr>
+	</thead>
 
-  <tbody>
-    <% @levels.each do |level| %>
-      <tr>
-        <td><%= level.user %></td>
-        <td><%= level.inputs %></td>
-        <td><%= level.outputs %></td>
-        <td><%= level.pieces %></td>
-        <td><%= level.width %></td>
-        <td><%= level.height %></td>
-        <td><%= level.name %></td>
-        <td><%= level.description %></td>
-        <td><%= link_to 'Show', level %></td>
-        <td><%= link_to 'Edit', edit_level_path(level) %></td>
-        <td><%= link_to 'Destroy', level, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+	<tbody>
+		<% @levels.each do |level| %>
+			<tr>
+				<td><%= level.user %></td>
+				<td><%= level.inputs %></td>
+				<td><%= level.outputs %></td>
+				<td><%= level.pieces %></td>
+				<td><%= level.width %></td>
+				<td><%= level.height %></td>
+				<td><%= level.name %></td>
+				<td><%= level.description %></td>
+				<td><%= link_to 'Show', level %></td>
+				<td><%= link_to 'Edit', edit_level_path(level) %></td>
+				<td><%= link_to 'Destroy', level, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
 
 <br>
 
-<%= link_to 'One', "/one" %>
-<%= link_to 'Two', "/two" %>
-<%= link_to 'Three', "/three" %>
-<%= link_to 'Four', "/four" %>
-<%= link_to 'New Level', new_level_path %>
+<%= link_to new_level_path, class: "add-fab" do %>
+	<paper-fab icon="add"></paper-fab>
+<% end %>

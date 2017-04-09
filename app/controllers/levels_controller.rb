@@ -10,6 +10,7 @@ class LevelsController < ApplicationController
 	# GET /levels/1
 	# GET /levels/1.json
 	def show
+		render layout: false
 	end
 
 	# GET /levels/new
@@ -76,11 +77,6 @@ class LevelsController < ApplicationController
 	def ajax_output
 		render "_output", layout: false
 	end
-
-	def one; render "made/one", layout: "level" end
-	def two; render "made/two", layout: "level" end
-	def three; render "made/three", layout: "level" end
-	def four; render "made/four", layout: "level" end
 
 	private
 	# Use callbacks to share common setup or constraints between actions.
