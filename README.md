@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/BrandonRoehl/TruBool.svg?branch=development)](https://travis-ci.org/BrandonRoehl/TruBool)
-
-# TruBool
+# TruBool [![Build Status](https://travis-ci.org/BrandonRoehl/TruBool.svg?branch=development)](https://travis-ci.org/BrandonRoehl/TruBool)
 
 * Use RVM for ruby management
 * Bundler for gem management
