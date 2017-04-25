@@ -26,15 +26,16 @@ ActiveRecord::Schema.define(version: 20161118220609) do
     t.index ["user_id"], name: "index_levels_on_user_id"
   end
 
-  create_table "users", id: :decimal, precision: 32, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
+    t.decimal  "gid",         precision: 32
     t.string   "email"
     t.string   "given_name"
     t.string   "family_name"
     t.string   "link"
     t.string   "picture"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["id"], name: "sqlite_autoindex_users_1", unique: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["gid"], name: "index_users_on_gid"
   end
 
 end
