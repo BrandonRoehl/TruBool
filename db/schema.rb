@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20161118220609) do
 
   create_table "levels", force: :cascade do |t|
-    t.integer  "user_id",     limit: 16
+    t.integer  "user_id"
     t.string   "JSONinputs"
     t.string   "JSONoutputs"
     t.string   "JSONpieces"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20161118220609) do
     t.integer  "height"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_levels_on_user_id"
   end
 
