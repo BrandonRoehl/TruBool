@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	def self.from_oauth(info)
-		u = self.find_or_create_by(id: info['id'])
+		u = self.find_or_create_by(gid: info['id'])
 		info.slice(
 			'email',
 			'given_name',
