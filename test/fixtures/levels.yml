@@ -2,9 +2,9 @@
 
 one:
   user: one
-  inputs: MyString
-  outputs: MyString
-  pieces: MyString
+  JSONinputs: "[\"1010\",\"1100\"]"
+  JSONoutputs: "[\"1000\"]"
+  JSONpieces: "[\"1\",\"1\"]"
   width: 1
   height: 1
   name: MyString
@@ -12,9 +12,9 @@ one:
 
 two:
   user: two
-  inputs: MyString
-  outputs: MyString
-  pieces: MyString
+  JSONinputs: "[\"1010\",\"1100\"]"
+  JSONoutputs: "[\"1000\"]"
+  JSONpieces: "[\"1\",\"1\"]"
   width: 1
   height: 1
   name: MyString
