@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/BrandonRoehl/TruBool.svg?branch=master)](https://travis-ci.org/BrandonRoehl/TruBool)
+[![Build Status](https://travis-ci.org/BrandonRoehl/TruBool.svg?branch=development)](https://travis-ci.org/BrandonRoehl/TruBool)
 
 # TruBool
 
