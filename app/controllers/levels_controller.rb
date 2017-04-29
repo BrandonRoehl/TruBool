@@ -1,5 +1,6 @@
 class LevelsController < ApplicationController
 	before_action :set_level, only: [:show, :edit, :update, :destroy]
+	before_action :only_creator, only: [:edit, :update, :destroy]
 
 	# GET /levels
 	# GET /levels.json
@@ -79,6 +80,11 @@ class LevelsController < ApplicationController
 	end
 
 	private
+
+	def only_creator
+		redirect_to :back, alert: "Only editable by the current user" if current_user == @level.user
+	end
+
 	# Use callbacks to share common setup or constraints between actions.
 	def set_level
 		@level = Level.find(params[:id])
