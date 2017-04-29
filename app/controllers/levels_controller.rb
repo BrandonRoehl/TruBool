@@ -82,7 +82,7 @@ class LevelsController < ApplicationController
 	private
 
 	def only_creator
-		redirect_to :back, alert: "Only editable by the current user" if current_user == @level.user
+		redirect_back fallback_location: levels_path, alert: "Only editable by the current user" if current_user != @level.user
 	end
 
 	# Use callbacks to share common setup or constraints between actions.
