@@ -1,3 +1,8 @@
 language: ruby
 rvm: ruby-2.4.1
 bundler_args: --without production
+deploy:
+    provider: heroku
+    on: master
+    api_key:
+        secure: "jP7V/3lMhRbHNiHI3y4CV1tgj00oSq+xS97r6pjRArUXCGDrtY2cgi4+oVirPaGmD8NqpbaLLHkMklFnHIvv3FIVZmc/iuve4FGz3lqZRHUSPajEkM9Lq2XnuHEMeBG5DW6CVrVn+b+1sH5Gy0C+Gw2Y5FApQDS/m2gAQnA3FjnFKLXbIFrFxsLvHNa6Yn5SazX4c6woEO9MBu+w1r8EEijm8imca5gCysowyYjrUrbgp8w9Dp+inXOquIKI3w//W6zVQUOvMmSf2hMFeJYEMhFrC0XsJuQvaBjy+wSoBTsC89cSy9BGkLGaMiIlSr7UX4nn3LNoAfe9RdcdWydJCiuUrN4qevFOpD8Xo9I+HisAbLsqI93EkHnCqBdEAUpM+gElJh3XkoecN+udnw0DPhggZ/rR7fJArHCYEXY6l4hPGKFyZK+FneMgI3RBNs7QNAZtU3J842CiTtTNTTw0VYX/3wxMFuEA7AfjLthOOLH/J32KteM41vBph1zuRalaDrag4tQHypoqBYHTZSX4m6ARarMhqxX2IxWZIuTUnUxMVZKwVT5rop0WYcejp9ZNsF8DePuPBhBKBRioV+hTB34On/XVmwLnTHkSB1pV4OJCy8XbmLzWRC+IejyhThtY1XcWslbm5H4aGLGkBtR3b71WJwg2XeEODPqgRpEdU/0="
