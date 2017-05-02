@@ -1,7 +1,7 @@
 class CreateLevels < ActiveRecord::Migration[5.0]
 	def change
 		create_table :levels do |t|
-			t.references :user, foreign_key: true
+			t.references :user, foreign_key: true, null: false
 			t.string :JSONinputs, default: "[\"\"]", null: false
 			t.string :JSONoutputs, default: "[\"\"]", null: false
 			t.string :JSONpieces, default: "[\"\"]", null: false

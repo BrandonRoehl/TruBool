@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20161118220609) do
 
   create_table "levels", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",                        null: false
     t.string   "JSONinputs",  default: "[\"\"]", null: false
     t.string   "JSONoutputs", default: "[\"\"]", null: false
     t.string   "JSONpieces",  default: "[\"\"]", null: false
