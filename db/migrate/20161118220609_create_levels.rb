@@ -4,7 +4,7 @@ class CreateLevels < ActiveRecord::Migration[5.0]
 			t.references :user, foreign_key: true
 			t.string :JSONinputs, default: "[\"\"]", null: false
 			t.string :JSONoutputs, default: "[\"\"]", null: false
-			t.string :JSONpieces, default: "\"\"", null: false
+			t.string :JSONpieces, default: "[\"\"]", null: false
 			t.integer :width, default: 15, null: false
 			t.integer :height, default: 10, null: false
 			t.string :name, default: "", null: false, index: true

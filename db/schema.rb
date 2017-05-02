@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161118220609) do
     t.integer  "user_id"
     t.string   "JSONinputs",  default: "[\"\"]", null: false
     t.string   "JSONoutputs", default: "[\"\"]", null: false
-    t.string   "JSONpieces",  default: "\"\"",   null: false
+    t.string   "JSONpieces",  default: "[\"\"]", null: false
     t.integer  "width",       default: 15,       null: false
     t.integer  "height",      default: 10,       null: false
     t.string   "name",        default: "",       null: false

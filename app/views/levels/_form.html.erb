@@ -40,7 +40,7 @@
   <%# Save as an inline hash  %>
   <h3>Inputs</h3>
   <div id="inputs">
-      <% for input in @inputs %>
+      <% for input in @level.inputs %>
           <%= render partial: "input", locals: {input: input} %>
       <% end %>
   </div>
@@ -48,13 +48,13 @@
 
   <h3>Outputs</h3>
   <div id="outputs">
-      <% for output in @outputs %>
+      <% for output in @level.outputs %>
           <%= render partial: "output", locals: {output: output} %>
       <% end %>
   </div>
   <paper-fab mini icon="add" onclick="addOutput()"></paper-fab>
 
-  <paper-input label="Pieces" id="level_pieces" value="<%= @pieces %>" name="level[pieces]" allowed-pattern="[0-9,]" auto-validate required></paper-input>
+  <paper-input label="Pieces" id="level_pieces" value="<%= @level.pieces.join(',') %>" name="level[pieces]" allowed-pattern="[0-9,]" auto-validate required></paper-input>
 
   <paper-textarea label="Description" id="level_description" value="<%= level.description %>" name="level[description]"></paper-textarea>
 

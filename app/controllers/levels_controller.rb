@@ -21,9 +21,6 @@ class LevelsController < ApplicationController
 
 	# GET /levels/1/edit
 	def edit
-		@inputs = @level.inputs
-		@outputs = @level.outputs
-		@pieces = @level.pieces.join(',')
 	end
 
 	# POST /levels
