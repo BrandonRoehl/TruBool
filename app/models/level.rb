@@ -1,5 +1,7 @@
 class Level < ApplicationRecord
 	belongs_to :user
+	validates :JSONinputs, :JSONoutputs, :JSONpieces, :width, :height, presence: true
+	validates :width, :height, numericality: { only_integer: true, greater_than: 0 }
 	[:inputs, :outputs, :pieces].each do |method|
 		define_method method do
 			if result = self.send("JSON#{method}")

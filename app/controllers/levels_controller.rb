@@ -17,11 +17,6 @@ class LevelsController < ApplicationController
 	# GET /levels/new
 	def new
 		@level = Level.new
-		@level.width = 15
-		@level.height = 10
-		@inputs = ['']
-		@outputs = ['']
-		@pieces = ""
 	end
 
 	# GET /levels/1/edit

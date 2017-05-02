@@ -14,27 +14,30 @@ ActiveRecord::Schema.define(version: 20161118220609) do
 
   create_table "levels", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "JSONinputs"
-    t.string   "JSONoutputs"
-    t.string   "JSONpieces"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "name"
+    t.string   "JSONinputs",  default: "[\"\"]", null: false
+    t.string   "JSONoutputs", default: "[\"\"]", null: false
+    t.string   "JSONpieces",  default: "\"\"",   null: false
+    t.integer  "width",       default: 15,       null: false
+    t.integer  "height",      default: 10,       null: false
+    t.string   "name",        default: "",       null: false
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["name"], name: "index_levels_on_name"
     t.index ["user_id"], name: "index_levels_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.decimal  "gid",         precision: 32
-    t.string   "email"
+    t.decimal  "gid",         precision: 32,                 null: false
+    t.string   "email",                      default: "",    null: false
     t.string   "given_name"
     t.string   "family_name"
     t.string   "link"
     t.string   "picture"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "admin",                      default: false, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.index ["email"], name: "index_users_on_email"
     t.index ["gid"], name: "index_users_on_gid"
   end
 
