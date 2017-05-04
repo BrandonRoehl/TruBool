@@ -2,168 +2,165 @@
 <link rel="import" href="/components/paper-styles/paper-styles.html">
 <%= render "layouts/theme" %>
 <style is="custom-style">
-paper-button[raised] {
-    color: white;
-    margin: 10px;
-    background: var(--primary-color);
-    white-space: nowrap;
-}
+	paper-button[raised] {
+		color: white;
+		margin: 10px;
+		background: var(--primary-color);
+		white-space: nowrap;
+	}
 
-    app-header.main {
-        color: #fff;
-        background-color: var(--primary-color);
-    }
+	app-header.main {
+		color: #fff;
+		background-color: var(--primary-color);
+	}
 
-    app-toolbar {
-        height: 120px;
-    }
+	app-toolbar {
+		height: 120px;
+	}
 
-    [condensed-title] {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 250px;
+	[condensed-title] {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 250px;
 
-        /* The difference in font size is used to calculate the scale of the title in the transition. */
-        font-size: 16px;
-    }
+		/* The difference in font size is used to calculate the scale of the title in the transition. */
+		font-size: 16px;
+	}
 
-    [main-title] {
-        position: absolute;
-        top: -120px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 425px;
-        -webkit-transform-origin: center top !important;
-        transform-origin: center top !important;
+	[main-title] {
+		position: absolute;
+		top: -120px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 425px;
+		-webkit-transform-origin: center top !important;
+		transform-origin: center top !important;
 
-        /* The difference in font size is used to calculate the scale of the title in the transition. */
-        font-size: 32px;
-    }
+		/* The difference in font size is used to calculate the scale of the title in the transition. */
+		font-size: 32px;
+	}
 
-    <%=
-        "
-    [condensed-title] {
-        background-image: url('#{ asset_path "Header-s.svg" }');
-    }
-    [main-title] {
-        background-image: url('#{ asset_path "Header-l.svg" }');
-    }
-        ".html_safe
-    %>
 
-    .content {
-        display: block;
-        position: relative;
-        max-width: 1000px;
-        margin: 5px auto;
-    }
+	.content {
+		display: block;
+		position: relative;
+		max-width: 1000px;
+		margin: 5px auto;
+	}
 
-    .card-container {
-        display: inline-block;
-        width: 33.33%;
-        color: black;
-        text-decoration: none;
-    }
+	.card-container {
+		display: inline-block;
+		width: 33.33%;
+		color: black;
+		text-decoration: none;
+	}
 
-    paper-card {
-        display: block;
-        margin: 5px;
+	paper-card {
+		display: block;
+		margin: 5px;
 
-        --paper-card-header-image: {
-            height: 200px;
-        }
-    }
+		--paper-card-header-image: {
+			height: 200px;
+		}
+	}
 
-    paper-card h2 {
-        margin: 4px;
-        font-weight: normal;
-    }
+	paper-card h2 {
+		margin: 4px;
+		font-weight: normal;
+	}
 
-    paper-card p {
-        margin: 4px;
-        color: #999;
-    }
+	paper-card p {
+		margin: 4px;
+		color: #999;
+	}
 
-    @media (max-width: 960px) {
-        .content {
-            max-width: 800px;
-        }
+	@media (max-width: 960px) {
+		.content {
+			max-width: 800px;
+		}
 
-        .card-container {
-            width: 50%;
-        }
-    }
+		.card-container {
+			width: 50%;
+		}
+	}
 
-    @media (max-width: 719px) {
-        app-toolbar {
-            height: 60px;
-        }
+	@media (max-width: 719px) {
+		app-toolbar {
+			height: 60px;
+		}
 
-        [condensed-title] {
-            background-size: 100px;
-        }
+		[condensed-title] {
+			background-size: 100px;
+		}
 
-        [main-title] {
-            top: -60px;
-            background-size: 225px;
-        }
+		[main-title] {
+			top: -60px;
+			background-size: 225px;
+		}
 
-        .content {
-            max-width: 400px;
-        }
+		.content {
+			max-width: 400px;
+		}
 
-        .card-container {
-            width: 100%;
-        }
-    }
+		.card-container {
+			width: 100%;
+		}
+	}
 
-    .avatar-container {
-        position: relative;
-        height: 90px;
-        padding: 2px;
-        width: 90px;
-        margin: 20px auto;
-    }
+	.avatar-container {
+		position: relative;
+		height: 90px;
+		padding: 2px;
+		width: 90px;
+		margin: 20px auto;
+	}
 
-    <% if logged_in? && current_user.picture.present? %>
-        <%=".avatar-container .image {
-            background-image: url('#{current_user.picture_scale(90)}');
-            background-size: contain;
-            border-radius: 50%; height: 100%;
-            width: 100%;}".html_safe
-            %>
-    <% end %>
+	.contact-info {
+		margin: 0 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #CCC;
+		text-align: center;
+	}
 
-    .contact-info {
-        margin: 0 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #CCC;
-        text-align: center;
-    }
+	.contact-info .name {
+		font-weight: bold;
+	}
 
-    .contact-info .name {
-        font-weight: bold;
-    }
+	.contact-info .email {
+		color: #999;
+	}
 
-    .contact-info .email {
-        color: #999;
-    }
+	paper-item {
+		@apply(--layout-center-center);
+		height: 54px;
+	}
 
-    paper-item {
-        @apply(--layout-center-center);
-        height: 54px;
-    }
+	app-toolbar paper-icon-button {
+		--paper-icon-button-ink-color: white;
+	}
 
-    app-toolbar paper-icon-button {
-        --paper-icon-button-ink-color: white;
-    }
+	<%= "
+	[condensed-title] {
+		background-image: url('#{ asset_path "Header-s.svg" }');
+	}
+	[main-title] {
+		background-image: url('#{ asset_path "Header-l.svg" }');
+	}
+	".html_safe %>
+<% if logged_in? && current_user.picture.present? %>
+	<%= ".avatar-container .image {
+		background-image: url('#{current_user.picture_scale(90)}');
+		background-size: contain;
+		border-radius: 50%; height: 100%;
+		width: 100%;}".html_safe %>
+<% end %>
 
 </style>

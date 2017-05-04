@@ -1,6 +1,10 @@
 language: ruby
 rvm: ruby-2.4.1
 bundler_args: --without production
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: change # default: always
 deploy:
     provider: heroku
     on: master
