@@ -4,7 +4,7 @@
 	<paper-card>
 		<div class="card-content">
 			<h3><%= link_to user.name, user %></h3>
-			<div><%= mail_to user.email, user.email %></div>
+			<img src="<%= user.picture_scale 128 %>" alt="<%= user.name %>" class="user_image" />
 		</div>
 		<div class="card-actions">
 			<div class="horizontal justified">
