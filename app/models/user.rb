@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	has_many :levels
+
 	def self.from_oauth(info)
 		u = self.find_or_create_by(gid: info['id'])
 		info.slice(

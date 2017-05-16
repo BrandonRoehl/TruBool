@@ -1,45 +1,8 @@
-<link rel="import" href="/components/paper-fab/paper-fab.html">
-<link rel="import" href="/components/paper-card/paper-card.html">
-<p id="notice"><%= notice %></p>
-
 <h1>Levels</h1>
 
-<% @levels.each do |level| %>
-	<paper-card>
-		<div class="card-content">
-			<h3><%= link_to level.name, level %></h3>
-			<div><%= level.description %></div>
-			<div><strong>Size:</strong> <%= level.width %> x <%= level.height %></div>
-			<div>
-				<strong>By,</strong>
-				<%= link_to level.user do %>
-					<%= level.user.name %>
-				<% end %>
-			</div>
-			<%# <div>'Show', level %>
-			<%# level.inputs %>
-			<%# level.outputs %>
-			<%# level.pieces %>
-		</div>
-		<% if current_user == level.user %>
-			<div class="card-actions">
-				<div class="horizontal justified">
-					<%= link_to level do %>
-						<paper-icon-button icon="info"></paper-icon-button>
-					<% end %>
-					<%= link_to edit_level_path level do %>
-						<paper-icon-button icon="create"></paper-icon-button>
-					<% end %>
-					<%= link_to level, method: :delete, data: { confirm: 'Are you sure?' } do %>
-						<paper-icon-button icon="delete"></paper-icon-button>
-					<% end %>
-				</div>
-			</div>
-		<% end %>
-	</paper-card>
+<% for level in @levels %>
+	<%= render partial: 'level', locals: { level: level } %>
 <% end %>
-
-<br>
 
 <%= link_to new_level_path, class: "add-fab" do %>
 	<paper-fab icon="add"></paper-fab>

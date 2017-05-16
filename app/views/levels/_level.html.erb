@@ -1,0 +1,28 @@
+<paper-card>
+	<div class="card-content">
+		<h3><%= link_to level.name, level %></h3>
+		<div><%= level.description %></div>
+		<div><strong>Size:</strong> <%= level.width %> x <%= level.height %></div>
+		<div>
+			<strong>By,</strong>
+			<%= link_to level.user do %>
+				<%= level.user.name %>
+			<% end %>
+		</div>
+	</div>
+	<% if current_user == level.user || current_user.admin %>
+		<div class="card-actions">
+			<div class="horizontal justified">
+				<%= link_to level do %>
+					<paper-icon-button icon="info"></paper-icon-button>
+				<% end %>
+				<%= link_to edit_level_path level do %>
+					<paper-icon-button icon="create"></paper-icon-button>
+				<% end %>
+				<%= link_to level, method: :delete, data: { confirm: 'Are you sure?' } do %>
+					<paper-icon-button icon="delete"></paper-icon-button>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</paper-card>

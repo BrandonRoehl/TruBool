@@ -7,11 +7,11 @@
 
 <p>
   <strong>Email:</strong>
-  <%= @user.email %>
+  <%= mail_to @user.email, @user.email %>
 </p>
 
-<p>
-  <strong>Id:</strong>
-  <%= @user.id %>
-</p>
+<% for level in @user.levels %>
+	<%= render partial: 'levels/level', locals: { level: level } %>
+<% end %>
+
 
