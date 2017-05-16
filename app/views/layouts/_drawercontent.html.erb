@@ -1,35 +1,35 @@
 <!-- nav panel -->
 <app-header-layout id="drawer" has-scrolling-region>
-    <% if logged_in? %>
-        <app-header fixed>
-            <div class="avatar-container">
-                <div class="image"></div>
-            </div>
-            <div class="contact-info">
-                <div class="name"><%= current_user.name %></div>
-                <div class="email"><%= current_user.email %></div>
-            </div>
-        </app-header>
-    <% end %>
-    <!-- nav menu -->
-    <paper-listbox>
-        <%= link_to levels_path do %>
-            <paper-item>
-                Home
-                <paper-ripple></paper-ripple>
-            </paper-item>
-        <% end %>
-        <%= link_to users_path do %>
-            <paper-item>
-                Users
-                <paper-ripple></paper-ripple>
-            </paper-item>
-        <% end %>
-        <%= link_to current_user do %>
-            <paper-item>
-                Profile
-                <paper-ripple></paper-ripple>
-            </paper-item>
-        <% end %>
-    </paper-listbox>
+	<% if logged_in? %>
+		<app-header fixed>
+			<div class="avatar-container">
+				<div class="image"></div>
+			</div>
+			<div class="contact-info">
+				<div class="name"><%= current_user.name %></div>
+				<div class="email"><%= current_user.email %></div>
+			</div>
+		</app-header>
+	<% end %>
+	<!-- nav menu -->
+	<paper-listbox>
+		<%= link_to levels_path do %>
+			<paper-item>
+				Home
+				<paper-ripple></paper-ripple>
+			</paper-item>
+		<% end %>
+		<%= link_to users_path do %>
+			<paper-item>
+				Users
+				<paper-ripple></paper-ripple>
+			</paper-item>
+		<% end %>
+		<%= link_to current_user do %>
+			<paper-item>
+				Profile
+				<paper-ripple></paper-ripple>
+			</paper-item>
+		<% end %>
+	</paper-listbox>
 </app-header-layout>

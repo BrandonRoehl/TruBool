@@ -1,7 +1,7 @@
 <h1>Levels</h1>
 
 <% for level in @levels %>
-	<%= render partial: 'level', locals: { level: level } %>
+	<%= render partial: 'levels/level', locals: { level: level } %>
 <% end %>
 
 <%= link_to new_level_path, class: "add-fab" do %>
