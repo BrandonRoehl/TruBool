@@ -6,12 +6,5 @@
 			<h3><%= link_to user.name, user %></h3>
 			<img src="<%= user.picture_scale 128 %>" alt="<%= user.name %>" class="user_image" />
 		</div>
-		<div class="card-actions">
-			<div class="horizontal justified">
-				<%= link_to user do %>
-					<paper-icon-button icon="info"></paper-icon-button>
-				<% end %>
-			</div>
-		</div>
 	</paper-card>
 <% end %>
