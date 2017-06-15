@@ -43,8 +43,9 @@ function dialogWith(html) {
 	window.onload();
 	var dialog = document.getElementById('dialog');
 	dialog.open();
-	setTimeout(() => dialog.center(), 150);
-	setTimeout(() => dialog.center(), 300);
+	for (i = 1; i <= 4; i++) {
+		setTimeout(() => dialog.center(), 150 * i);
+	}
 }
 function dialogOrEval(xhr) {
 	if(xhr.getResponseHeader('Content-Type').indexOf('text/html') != -1) {
@@ -57,8 +58,6 @@ function dialogOrEval(xhr) {
 // <%= link_to 'Edit', [:edit, @foo], {remote: true} %>
 $(document).on('ajax:success', 'a[data-remote]', function(e, data, status, xhr) {
 	dialogOrEval(xhr);
-	console.log(xhr);
-	console.log(xhr.getAllResponseHeaders());
 	window.history.pushState({urlPath: e.currentTarget.href}, document.title, e.currentTarget.href);
 });
 $(document).on('ajax:error', 'a[data-remote]', function(e, xhr, status, error) {
