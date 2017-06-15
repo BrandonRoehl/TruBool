@@ -12,27 +12,35 @@
 //
 //= require jquery
 //= require jquery_ujs
+// require_tree .
 // require turbolinks
 
 
 
 window.onload = function(){
 	// Prefer native date pickers but fallback to js ones
-	if(!supportsInputType('date')){
-		$('input[type=date]').fdatepicker({
-			format: 'yyyy-mm-dd'
-		});
-	}
-	if(!supportsInputType('datetime-local')){
-		$('input[type=datetime-local]').fdatepicker({
-			format: 'yyyy-mm-dd hh:ii',
-			pickTime: true
-		});
-	}
+	// if(!supportsInputType('date')){
+		// $('input[type=date]').datepicker({
+			// format: 'yyyy-mm-dd'
+		// });
+	// }
+	// if(!supportsInputType('datetime-local')){
+		// $('input[type=datetime-local]').datepicker({
+			// format: 'yyyy-mm-dd hh:ii',
+			// pickTime: true
+		// });
+	// }
 }
+
+// function supportsInputType(type){
+	// var input = document.createElement('input');
+	// input.setAttribute('type', type);
+	// return input.type == type;
+// }
 
 function dialogWith(html) {
 	$('#dialogContent').html(html);
+	$('#dialog')[0].open()
 	window.onload();
 }
 function dialogOrEval(xhr) {

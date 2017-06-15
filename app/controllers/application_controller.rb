@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	before_action :login, except: [:root, :oauth]
 	helper_method :current_user, :logged_in?
+	# No layout for ajax
+	layout proc{|c| c.request.xhr? ? false : "application" }
 
 	def oauth
 		client_init

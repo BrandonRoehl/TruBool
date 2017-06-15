@@ -16,7 +16,7 @@
 				<%= link_to level do %>
 					<paper-icon-button icon="info"></paper-icon-button>
 				<% end %>
-				<%= link_to edit_level_path level do %>
+				<%= link_to edit_level_path(level), remote: true do %>
 					<paper-icon-button icon="create"></paper-icon-button>
 				<% end %>
 				<%= link_to level, method: :delete, data: { confirm: 'Are you sure?' } do %>
