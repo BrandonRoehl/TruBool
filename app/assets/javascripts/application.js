@@ -40,8 +40,10 @@ window.onload = function(){
 
 function dialogWith(html) {
 	$('#dialogContent').html(html);
-	$('#dialog')[0].open()
 	window.onload();
+	var dialog = document.getElementById('dialog');
+	dialog.open();
+	setTimeout(() => dialog.center(), 150);
 }
 function dialogOrEval(xhr) {
 	if(xhr.getResponseHeader('Content-Type').indexOf('text/javascript') == -1) {
