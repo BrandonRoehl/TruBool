@@ -44,11 +44,12 @@ function dialogWith(html) {
 	var dialog = document.getElementById('dialog');
 	dialog.open();
 	setTimeout(() => dialog.center(), 150);
+	setTimeout(() => dialog.center(), 300);
 }
 function dialogOrEval(xhr) {
-	if(xhr.getResponseHeader('Content-Type').indexOf('text/javascript') == -1) {
+	if(xhr.getResponseHeader('Content-Type').indexOf('text/html') != -1) {
 		dialogWith(xhr.responseText);
-	} else {
+	} else if(xhr.getResponseHeader('Content-Type').indexOf('text/javascript') != -1) {
 		eval(xhr.responseText);
 	}
 }
@@ -56,6 +57,8 @@ function dialogOrEval(xhr) {
 // <%= link_to 'Edit', [:edit, @foo], {remote: true} %>
 $(document).on('ajax:success', 'a[data-remote]', function(e, data, status, xhr) {
 	dialogOrEval(xhr);
+	console.log(xhr);
+	console.log(xhr.getAllResponseHeaders());
 	window.history.pushState({urlPath: e.currentTarget.href}, document.title, e.currentTarget.href);
 });
 $(document).on('ajax:error', 'a[data-remote]', function(e, xhr, status, error) {
