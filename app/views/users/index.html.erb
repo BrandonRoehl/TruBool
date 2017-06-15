@@ -3,7 +3,7 @@
 <% for user in @users %>
 	<paper-card>
 		<div class="card-content">
-			<h3><%= link_to user.name, user %></h3>
+			<h3><%= link_to user.name, user, remote: true %></h3>
 			<img src="<%= user.picture_scale 128 %>" alt="<%= user.name %>" class="user_image" />
 		</div>
 	</paper-card>
